@@ -1,79 +1,26 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Proyecto 2 - PHP-Laravel
 
-## About Laravel
+Página web de críticas de videojuegos. El estilo de página va a seguir el de gamespot.com (sólo la parte de rating de un juego), de hecho gamespot provee una API de uso libre desde la cual puedo obtener los datos necesarios de los últimos juegos lanzados para poblar la base de datos (al menos descargar los datos inicialmente). La página está dedicada a brindar un medio para compartir experiencias de uso en diversos juegos entre usuarios, lo que brinda una gran utilidad, por ejemplo, para alguien que está queriendo decidir si comprar un juego en particular o nó. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Dentro de la página voy a definir dos roles:
+* Administrador : Encargado de agregar juegos y sus datos correspondientes a la página. Adicionalmente el administrador puede borrar comentarios inapropiados (spoilers), o bloquear usuarios que infrigen las leyes de la comunidad de la página (ban-hammer).
+* Usuario : Su principal utilidad para la página es puntuar los juegos disponibles dentro de la misma en base a una crítica general y/o diversas críticas adicionales mas puntuales.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Particularmente, como primer modelo, un juego va a disponer de diversos atributos o campos, donde solo el administrador tiene ABM:
+* Nombre del juego.
+* Id único del juego.
+* Imágen del juego.
+* Fecha de lanzamiento.
+* Descripción del juego.
+* Géneros del juego.
+* Página web del juego.
+* Puntaje general del juego.
+* Puntajes en detalle del mismo (luego de requerirlo por medio de un botón en la vista).
+* Se dispondría una vista de los comentarios sobre el juego.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Por otro lado un usuario de la página tiene acceso a la funcionalidad que brinda datos a la página, dentro de lo cual define otro modelo de datos, relacionado con el puntaje y los comentarios sobre juegos:
+* Un usuario puede comentar y puntuar un juego.
+* Como funcionalidad adicional pensé permitir a un usuario agregar precisión sobre la puntuación del juego agregando diversas áreas del juego las cuales puntuar. Por ejemplo, que tan buena es la historia, que tan buenos son los gráficos, que tan bueno es el control del juego, que tan buena es la jugabilidad del mismo (mecánicas únicas del mismo), si tiene un modo multijugador que tan disfrutable es el mismo, etc.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Un ejemplo de lo que deseo crear como página puede verse acá https://www.gamespot.com/games/gears-5/reviews/.
