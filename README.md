@@ -23,4 +23,6 @@ Por otro lado un usuario de la página tiene acceso a la funcionalidad que brind
 * Un usuario puede comentar y puntuar un juego.
 * Como funcionalidad adicional pensé permitir a un usuario agregar precisión sobre la puntuación del juego agregando diversas áreas del juego las cuales puntuar. Por ejemplo, que tan buena es la historia, que tan buenos son los gráficos, que tan bueno es el control del juego, que tan buena es la jugabilidad del mismo (mecánicas únicas del mismo), si tiene un modo multijugador que tan disfrutable es el mismo, etc.
 
+Además pensaba definir un tercer modelo de datos que permita manejar "peticiones" de juegos, el cual permitiría a un usuario pedirle al administrador que cree una entrada en la página para un juego particular.
+
 Un ejemplo de lo que deseo crear como página puede verse acá https://www.gamespot.com/games/gears-5/reviews/.
