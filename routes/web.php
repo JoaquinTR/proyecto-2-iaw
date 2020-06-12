@@ -17,3 +17,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
+Route::get('/dashboard', 'AdminController@index')->middleware('is_admin')->name('dashboard');
