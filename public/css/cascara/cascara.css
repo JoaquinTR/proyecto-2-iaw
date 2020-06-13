@@ -6,12 +6,29 @@
 	line-height: 60px;
 	background-color: #f5f5f5;
 }
-.login {
-    margin-bottom:5px;
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='4' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-.olvide{
-    width: max-content !important;
+.navbar-dark .navbar-toggler{
+    border-color: rgba(255, 255, 255, 1)!important;
+}
+
+.navbar-toggler{
+    background-color: rgba(255, 255, 255, 0.4)!important;
+    border: 3px solid rgba(255, 255, 255, 1)!important;
+}
+
+.back-fix{
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    border: 2px solid rgba(255, 255, 255, 1) !important;
+    font-weight: bold!important;
+    border-radius: 0.5rem!important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    /* color: rgba(255, 255, 255, 1)!important; */
 }
 
 .game-font {
@@ -20,4 +37,16 @@
 
 .navbar-brand{
     font-size: 1.5rem !important;
+}
+
+.navbar{
+    background-image:url("../../images/navbar-bg2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar ul li a:hover {
+    color: white !important;
+    font-weight: bolder;
 }
