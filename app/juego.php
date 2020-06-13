@@ -13,7 +13,7 @@ class juego extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre', 'imagen', 'genero','fecha_lanzamiento', 'descripcion','url_sitio','plataforma'
+        'nombre', 'imagen', 'genero','fecha_lanzamiento', 'descripcion','plataforma','editor','desarrollador'
     ];
 
     /**

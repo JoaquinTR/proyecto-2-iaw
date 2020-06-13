@@ -14,7 +14,7 @@ class calificacion extends Model
 
     //tipo = jugador o no
     protected $fillable = [
-        'autor', 'id_juego', 'descripcion','puntaje', 'tipo'
+        'autor','id_juego', 'descripcion','reseña','puntaje','tipo'
     ];
 
     /**

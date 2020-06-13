@@ -17,11 +17,12 @@ class CreateJuegoCalificacionTable extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->string('imagen');
-            $table->string('genero');
+            $table->longText('genero');
             $table->timestamp('fecha_lanzamiento');
-            $table->string('descripcion');
-            $table->string('url_sitio');
-            $table->string('plataforma');
+            $table->longText('descripcion');
+            $table->longText('plataforma');
+            $table->longText('editor');
+            $table->longText('desarrollador');
             $table->timestamps();
         });
 
@@ -30,7 +31,8 @@ class CreateJuegoCalificacionTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('autor');
             $table->unsignedBigInteger('id_juego');
-            $table->string('descripcion');
+            $table->longText('reseña');
+            $table->longText('descripcion');
             $table->string('puntaje');
             $table->string('tipo');
         });
@@ -43,7 +45,7 @@ class CreateJuegoCalificacionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('juego');
         Schema::dropIfExists('calificacion');
+        Schema::dropIfExists('juego');
     }
 }

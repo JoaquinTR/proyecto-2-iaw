@@ -11,6 +11,6 @@ class CalificacionSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
