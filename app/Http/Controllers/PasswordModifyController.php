@@ -19,7 +19,7 @@ class PasswordModifyController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Muestra el formulario de cambio de contraseña.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -29,7 +29,7 @@ class PasswordModifyController extends Controller
     }
 
     /**
-     * Tomar datos de usuario.
+     * Toma los datos que ingresó el usuario y los actualiza en el modelo.
      *
      * @return \Illuminate\Http\Response
      */
