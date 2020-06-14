@@ -27,10 +27,6 @@
     border-radius: 0.5rem!important;
 }
 
-.navbar-dark .navbar-nav .nav-link {
-    /* color: rgba(255, 255, 255, 1)!important; */
-}
-
 .game-font {
     font-family: 'GameFont';
 }
@@ -48,5 +44,10 @@
 
 .navbar ul li a:hover {
     color: white !important;
+    font-weight: bolder;
+}
+
+div.dropdown-menu.dropdown-menu-right.show a.dropdown-item:hover {
+    color: black !important;
     font-weight: bolder;
 }

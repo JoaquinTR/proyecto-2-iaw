@@ -46,6 +46,9 @@
                         <a class="nav-link" href="#">Calificaciones</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link" href="#">Juegos</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="#">Noticias</a>
                       </li>
                       <li class="nav-item">
@@ -55,7 +58,7 @@
 
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto back-fix">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -68,7 +71,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="back-fix nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 

@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
+class PasswordModifyController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('profile.contraseña');
+    }
+
+    /**
+     * Tomar datos de usuario.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // Obtener el usuario actual
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        $request->validate(
+            [
+                'password' => 'required|min:8',
+                'passwordr' => 'required|same:password|min:8',
+            ],
+            [
+                'password.required' => 'Se necesita una contraseña.',
+                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'passwordr.required' => 'Por favor repita la contraseña.',
+                'passwordr.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'passwordr.same' => 'Las contraseñas deben coincidir.',
+            ]);
+
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+
+        // Lleno el modelo de usuario
+        $user->fill([
+            'password' => $input['password']
+        ]);
+
+        // Grabo en la base de datos
+        $user->save();
+
+        return back()->with('success', 'Contraseña modificada correctamente.');
+    }
+}

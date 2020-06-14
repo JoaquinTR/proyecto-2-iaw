@@ -49,4 +49,11 @@ class User extends Authenticatable
     public function isAdmin()    {
         return $this->type === self::ADMIN_TYPE;
     }
+
+    /**
+     * Retorna si el usuario verificó su e-mail.
+     */
+    public function isVerified()    {
+        return $this->email_verified_at != null;
+    }
 }
