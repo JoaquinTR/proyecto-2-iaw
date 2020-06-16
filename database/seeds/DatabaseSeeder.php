@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             JuegoSeeder::class,
             CalificacionSeeder::class,
-            GeneroSeeder::class
+            GeneroSeeder::class,
+            PlataformaSeeder::class,
+            EditorSeeder::class,
+            DesarrolladorSeeder::class
         ]);
     }
 }

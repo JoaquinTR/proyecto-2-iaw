@@ -18,6 +18,6 @@ class isUser
         if(!auth()->user()->isAdmin()) {
             return $next($request);
         }
-        return redirect('home');
+        return back()->with('error', 'No necesita acceder a este sitio.');
     }
 }

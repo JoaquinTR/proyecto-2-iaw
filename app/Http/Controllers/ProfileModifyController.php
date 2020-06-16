@@ -29,11 +29,11 @@ class ProfileModifyController extends Controller
     }
 
     /**
-     * Tomar datos de usuario.
+     * Tomar datos de nombre de usuario.
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeName(Request $request)
     {
         // Obtener el usuario actual
         $userId = Auth::id();
@@ -41,23 +41,51 @@ class ProfileModifyController extends Controller
 
         $request->validate(
             [
-                'name' => 'required|min:5',
-                'email' => 'required|email|unique:users'
+                'name' => 'required|min:5'
             ],
             [
                 'name.required' => 'Se necesita un nombre.',
-                'name.min' => 'El nombre debe tener al menos 5 caracteres.',
+                'name.min' => 'El nombre debe tener al menos 5 caracteres.'
+            ]);
+
+        $input = $request->all();
+
+        // Lleno el modelo de usuario
+        $user->fill([
+            'name' => $input['name']
+        ]);
+
+        // Grabo en la base de datos
+        $user->save();
+
+        return back()->with('success', 'Datos modificados correctamente.');
+    }
+
+    /**
+     * Tomar datos de email de usuario.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storeEmail(Request $request)
+    {
+        // Obtener el usuario actual
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        $request->validate(
+            [
+                'email' => 'required|email|unique:users'
+            ],
+            [
                 'email.required' => 'Por favor ingrese un email.',
                 'email.email' => 'Por favor ingrese un email.',
                 'email.unique' => 'El email ya está regristrado.'
             ]);
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
 
         // Lleno el modelo de usuario
         $user->fill([
-            'name' => $input['name'],
             'email' => $input['email']
         ]);
 

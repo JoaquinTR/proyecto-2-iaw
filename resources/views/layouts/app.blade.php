@@ -10,8 +10,6 @@
     <link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon"/>
     <title>Gaming Place</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -26,10 +24,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/cascara/cascara.css') }}">
+    @yield('css')
 
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="d-flex flex-column full-size">
         <nav class="navbar pull-left navbar-expand-md navbar-dark shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand game-font mr-4" href="{{ url('/') }}">
@@ -107,10 +106,13 @@
         </main>
 
         {{-- footer begin --}}
-        <footer class="footer bg-dark d-flex justify-content-center">
+        <footer class="footer bg-dark d-flex justify-content-center mt-auto">
             <span class="game-font text-light">© Game Place</span>
         </footer>
         {{-- footer end --}}
     </div>
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
 </body>
 </html>

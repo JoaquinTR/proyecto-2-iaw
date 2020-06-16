@@ -1,4 +1,12 @@
-@extends('profile')
+@php
+    if(Auth::user()->isAdmin()){
+        $layout = 'dashboard';
+    }else{
+        $layout = 'profile';
+    }
+@endphp
+
+@extends($layout)
 
 @section('seleccion-perfil')
 <div class="container">
@@ -9,14 +17,7 @@
 
                 <div class="card-body">
 
-                    @if(Session::has('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                        @php
-                            Session::forget('success');
-                        @endphp
-                    </div>
-                    @endif
+                    @include('components.flash-message')
 
                     <form method="POST" action="{{ url('/profile/contraseña') }}">
                         {{ csrf_field() }}

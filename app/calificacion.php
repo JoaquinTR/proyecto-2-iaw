@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class calificacion extends Model
 {
-    const CREATED_AT = 'fecha_creacion';
-    const UPDATED_AT = 'ultima_actualizacion';
-
     protected $table = 'calificacion';
     protected $primaryKey = 'id';
 

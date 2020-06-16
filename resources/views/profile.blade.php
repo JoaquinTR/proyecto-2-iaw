@@ -8,18 +8,27 @@
                     Perfil de usuario
                 </div>
                 <div class="">
+
                     <div class="p-2 d-flex flex-column">
                         <div class="">
-                            Nombre: {{ Auth::user()->name }}
+                            Nombre:
+                        </div>
+                        <div class="text-center">
+                            {{ Auth::user()->name }}
                         </div>
                         <div class="">
-                            E-mail: {{ Auth::user()->email }}
+                            E-mail:
+                        </div>
+                        <div class="text-center">
+                            {{ Auth::user()->email }}
                         </div>
                     </div>
+
                     <hr/>
+
                     <div class="p-2 d-flex flex-column">
                         <div class="mb-2">
-                            <a class="btn btn-primary btn-block" href="{{ route('modify') }}">
+                            <a class="btn btn-primary btn-block" href="{{ route('modify_data') }}">
                                 Modificar datos
                             </a>
                         </div>
@@ -31,7 +40,7 @@
                             </div>
                         @endif
                         <div class="mb-2">
-                            <a class="btn btn-primary btn-block" href="{{ route('contraseña') }}">
+                            <a class="btn btn-primary btn-block" href="{{ route('modify_passw') }}">
                                 Cambiar contraseña
                             </a>
                         </div>

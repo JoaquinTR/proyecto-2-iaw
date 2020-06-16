@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class juego extends Model
 {
-    const CREATED_AT = 'fecha_creacion';
-    const UPDATED_AT = 'ultima_actualizacion';
-
     protected $table = 'juego';
     protected $primaryKey = 'id';
 

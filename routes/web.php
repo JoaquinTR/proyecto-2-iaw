@@ -19,14 +19,35 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@index')->middleware('is_user')->name('profile');
-Route::get('/profile/modify', 'ProfileModifyController@index')->middleware('is_user')->name('modify');
-Route::post('/profile/modify', 'ProfileModifyController@store')->middleware('is_user')->name('modify');
+Route::get('/profile/modify', 'ProfileModifyController@index')->name('modify_data');
+Route::post('/profile/modify/name', 'ProfileModifyController@storeName')->name('modify_data.nombre');
+Route::post('/profile/modify/email', 'ProfileModifyController@storeEmail')->name('modify_data.email');
 
-Route::get('/profile/contraseña', 'PasswordModifyController@index')->middleware('is_user')->name('contraseña');
-Route::post('/profile/contraseña', 'PasswordModifyController@store')->middleware('is_user')->name('contraseña');
+Route::get('/profile/contraseña', 'PasswordModifyController@index')->name('modify_passw');
+Route::post('/profile/contraseña', 'PasswordModifyController@store')->name('modify_passw');
 
 Route::get('/dashboard', 'AdminController@index')->middleware('is_admin')->name('dashboard');
+Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('is_admin')->name('dashboard.game');
+Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('is_admin')->name('dashboard.game');
+
+Route::get('/decoradores', 'DecoradorController@index')->middleware('is_admin')->name('dashboard.decoradores');
+Route::post('/decoradores/genero', 'DecoradorController@createGenero')->middleware('is_admin')->name('dashboard.decoradores.genero');
+Route::post('/decoradores/plataforma', 'DecoradorController@createPlataforma')->middleware('is_admin')->name('dashboard.decoradores.plataforma');
+Route::post('/decoradores/editor', 'DecoradorController@createEditor')->middleware('is_admin')->name('dashboard.decoradores.editor');
+Route::post('/decoradores/desarrollador', 'DecoradorController@createDesarrollador')->middleware('is_admin')->name('dashboard.decoradores.desarrollador');
 
 Route::get('/verify', function () {
     return view('auth.verify');
 })->middleware('is_user')->name('verify');
+
+
+Route::get('generos', function (Illuminate\Http\Request  $request) {
+    $term = $request->term ?: '';
+    $generos = App\Plataforma::where('nombre', 'like', $term.'%')->get();
+    $results["results"] = [];
+
+    foreach ($generos as $genero) {
+        $results["results"][] = ['id' => $genero->{"id"}, 'text' => $genero->{"nombre"}];
+    }
+    return \Response::json($results);
+})->middleware('is_admin')->name("generos");
