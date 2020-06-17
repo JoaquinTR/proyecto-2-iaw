@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('#reset-form').on('click', function(){
+        initInputs;
+    })
     $('#generos').select2({
         tags:true
     });
@@ -16,13 +19,26 @@ $(document).ready(function () {
         clearBtn:true
     });
 
-    //seteo los valores predefinidos de los componentes select2
+
+    initInputs();
+});
+
+/**
+ * Setea los valores predefinidos de los componentes select2 y de los input comunes.
+ */
+function initInputs(){
     let generos = JSON.parse(juego.genero);
     let plataformas = JSON.parse(juego.plataforma);
     let editores = JSON.parse(juego.editor);
     let desarrollador = JSON.parse(juego.desarrollador);
-    $('select[name$="generos_id[]"').val(generos).change();
-    $('select[name$="plataformas_id[]"').val(plataformas).change();
+    $('select[name$="generos_id[]"]').val(generos).change();
+    $('select[name$="plataformas_id[]"]').val(plataformas).change();
     $('select[name$="editores_id[]"').val(editores).change();
-    $('select[name$="desarrolladores_id[]"').val(desarrollador).change();
-});
+    $('select[name$="desarrolladores_id[]"]').val(desarrollador).change();
+
+    $('input[name$=nombre]').val(juego.nombre);
+    $('input[name$=desc]').val(juego.descripcion);
+    $('input[name$=imagen]').val(juego.imagen);
+    $('input[name$=imagen]').val(juego.imagen);
+    $('input[name$=date]').val(juego.fecha_lanzamiento);
+}

@@ -10,7 +10,12 @@
 <div class="container">
     <div class="row">
         <div class="card">
-            <div class="card-header">Lista de juegos</div>
+            <div class="card-header">
+                Lista de juegos
+                <a type="button" class="close" href="{{ route('dashboard') }}">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
 
             <div class="card-body pl-1">
 

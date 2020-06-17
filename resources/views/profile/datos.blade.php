@@ -13,7 +13,12 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Modificar Datos</div>
+                <div class="card-header">
+                    Modificar Datos
+                    <a type="button" class="close" href="{{ route($layout) }}">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
 
                 <div class="card-body">
 

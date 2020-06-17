@@ -71,6 +71,12 @@
                             </a>
                         </div>
 
+                        <div class="mt-2">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                                Ver calificaciones
+                            </a>
+                        </div>
+
                         <div class="my-2">
                             <a class="btn btn-danger  btn-block" href="{{ route('dashboard.game') }}">
                                 BAN HAMMER

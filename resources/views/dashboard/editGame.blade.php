@@ -8,7 +8,7 @@
 @section('seleccion-perfil')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">Editar juego</div>
 
@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             <label>Nombre:</label>
-                            <input type="text" name="nombre" class="form-control" placeholder="" value="{{ $juego->nombre }}">
+                            <input type="text" name="nombre" class="form-control" placeholder="">
                             @if ($errors->has('nombre'))
                                 <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             <label>Descripción:</label>
-                            <input type="text" name="desc" class="form-control" placeholder="" value="{{ $juego->descripcion }}">
+                            <input type="text" name="desc" class="form-control" placeholder="">
                             @if ($errors->has('desc'))
                                 <span class="text-danger">{{ $errors->first('desc') }}</span>
                             @endif
@@ -69,7 +69,7 @@
 
                         <div class="form-group">
                             <label for="date" class="control-label">Fecha de lanzamiento:</label>
-                            <input id="datep" name="date" type="text" class="form-control" data-provide="datepicker" value="{{ $juego->fecha_lanzamiento }}">
+                            <input id="datep" name="date" type="text" class="form-control" data-provide="datepicker">
                             @if ($errors->has('date'))
                                 <span class="text-danger">{{ $errors->first('date') }}</span>
                             @endif
@@ -104,6 +104,7 @@
                     <div class="form-group">
                         <button class="btn btn-success btn-submit" form="form-edit">Finalizar</button>
                         <a class="btn btn-secondary" href="{{ route('dashboard.game.all') }}">Cancelar</a>
+                        <button class="btn btn-secondary" id="reset-form">Resetear campos</button>
                     </div>
                 </div>
             </div>

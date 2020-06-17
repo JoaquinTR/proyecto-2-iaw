@@ -8,9 +8,14 @@
 @section('seleccion-perfil')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">Agregar nuevo juego</div>
+                <div class="card-header">
+                    Agregar nuevo juego
+                    <a type="button" class="close" href="{{ route('dashboard') }}">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
 
                 <div class="card-body">
 
