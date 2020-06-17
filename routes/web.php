@@ -28,7 +28,8 @@ Route::post('/profile/contraseña', 'PasswordModifyController@store')->name('mod
 
 Route::get('/dashboard', 'AdminController@index')->middleware('is_admin')->name('dashboard');
 Route::get('/dashboard/games/all', 'GameController@index')->middleware('is_admin')->name('dashboard.game.all');
-Route::post('/dashboard/games/edit/{id}', 'GameController@edit')->middleware('is_admin')->name('dashboard.game.edit');
+Route::get('/dashboard/games/edit/{id}', 'GameController@updateIndex')->middleware('is_admin')->name('dashboard.game.edit');
+Route::post('/dashboard/games/edit/{id}', 'GameController@update')->middleware('is_admin')->name('dashboard.game.edit');
 Route::delete('/dashboard/games/delete/{id}', 'GameController@destroy')->middleware('is_admin')->name('dashboard.game.delete');
 Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('is_admin')->name('dashboard.game');
 Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('is_admin')->name('dashboard.game');

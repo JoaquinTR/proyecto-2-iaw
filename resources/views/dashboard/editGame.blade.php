@@ -10,18 +10,18 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Agregar nuevo juego</div>
+                <div class="card-header">Editar juego</div>
 
                 <div class="card-body">
 
                     @include('components.flash-message')
 
-                    <form method="POST" action="{{ url('/dashboard/games/new') }}">
+                    <form id="form-edit" method="POST" action="{{ url('/dashboard/games/edit',$juego->id) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             <label>Nombre:</label>
-                            <input type="text" name="nombre" class="form-control" placeholder="">
+                            <input type="text" name="nombre" class="form-control" placeholder="" value="{{ $juego->nombre }}">
                             @if ($errors->has('nombre'))
                                 <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             <label>Descripción:</label>
-                            <input type="text" name="desc" class="form-control" placeholder="">
+                            <input type="text" name="desc" class="form-control" placeholder="" value="{{ $juego->descripcion }}">
                             @if ($errors->has('desc'))
                                 <span class="text-danger">{{ $errors->first('desc') }}</span>
                             @endif
@@ -69,7 +69,7 @@
 
                         <div class="form-group">
                             <label for="date" class="control-label">Fecha de lanzamiento:</label>
-                            <input id="datep" name="date" type="text" class="form-control" data-provide="datepicker">
+                            <input id="datep" name="date" type="text" class="form-control" data-provide="datepicker" value="{{ $juego->fecha_lanzamiento }}">
                             @if ($errors->has('date'))
                                 <span class="text-danger">{{ $errors->first('date') }}</span>
                             @endif
@@ -99,11 +99,12 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
-                            <button class="btn btn-success btn-submit">Finalizar</button>
-                        </div>
-
                     </form>
+
+                    <div class="form-group">
+                        <button class="btn btn-success btn-submit" form="form-edit">Finalizar</button>
+                        <a class="btn btn-secondary" href="{{ route('dashboard.game.all') }}">Cancelar</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,5 +115,9 @@
 @section('scripts')
 <script src="{{ asset('js/select2.min.js') }}" defer></script>
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}" defer></script>
-<script src="{{ asset('js/newGame/newGame.js') }}" defer></script>
+<script type="text/javascript">
+    var juego = {!! json_encode($juego); !!}; //paso los datos del juego al js
+</script>
+{{-- es el mismo frontend que newGame, esto solo setea select2 y datepicker --}}
+<script src="{{ asset('js/editGame/editGame.js') }}" defer></script>
 @endsection

@@ -13,7 +13,9 @@ class GeneroSeeder extends Seeder
     public function run()
     {
         Genero::create(['nombre' => 'RPG']);
+        Genero::create(['nombre' => 'Action']);
         Genero::create(['nombre' => 'Acción']);
+        Genero::create(['nombre' => 'Adventure']);
         Genero::create(['nombre' => 'Aventura']);
         Genero::create(['nombre' => 'Simulación']);
         Genero::create(['nombre' => 'Deporte']);

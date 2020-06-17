@@ -12,12 +12,12 @@ class PlataformaSeeder extends Seeder
      */
     public function run()
     {
-        Plataforma::create(['nombre' => 'Playstation']);
-        Plataforma::create(['nombre' => 'Playstation 2']);
-        Plataforma::create(['nombre' => 'Playstation 3']);
-        Plataforma::create(['nombre' => 'Playstation 4']);
-        Plataforma::create(['nombre' => 'Playstation 5']);
-        Plataforma::create(['nombre' => 'Playstation Portable (PSP)']);
+        Plataforma::create(['nombre' => 'PlayStation']);
+        Plataforma::create(['nombre' => 'PlayStation 2']);
+        Plataforma::create(['nombre' => 'PlayStation 3']);
+        Plataforma::create(['nombre' => 'PlayStation 4']);
+        Plataforma::create(['nombre' => 'PlayStation 5']);
+        Plataforma::create(['nombre' => 'PlayStation Portable (PSP)']);
         Plataforma::create(['nombre' => 'Android']);
         Plataforma::create(['nombre' => 'IOS']);
         Plataforma::create(['nombre' => 'Xbox 360']);

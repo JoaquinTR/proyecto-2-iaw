@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="ml-5 d-flex flex-row">
+    <div class="ml-3 d-flex flex-row">
         <div class="justify-content-left">
             <div class="card">
                 <div class="card-header">
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="my-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                            <a class="btn btn-danger  btn-block" href="{{ route('dashboard.game') }}">
                                 BAN HAMMER
                             </a>
                         </div>
