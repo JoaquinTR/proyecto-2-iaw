@@ -54,13 +54,24 @@
                             </a>
                         </div>
 
-                        <div class="mt-2">
+                        <div class="my-2">
                             <a class="btn btn-primary  btn-block" href="{{ route('dashboard.decoradores') }}">
                                 Cargar decoradores de juegos
                             </a>
                         </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="p-2 d-flex flex-column">
 
                         <div class="mt-2">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                                Ver usuarios
+                            </a>
+                        </div>
+
+                        <div class="my-2">
                             <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
                                 BAN HAMMER
                             </a>
@@ -72,7 +83,7 @@
 
                     <div class="p-2 d-flex flex-column">
                         <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game.all') }}">
                                 Ver juegos
                             </a>
                         </div>

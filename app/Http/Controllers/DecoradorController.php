@@ -38,15 +38,16 @@ class DecoradorController extends Controller
 
         $request->validate(
             [
-                'genero' => 'required|unique:genero',
+                'nombre' => 'required|unique:genero',
             ],
             [
-                'genero.required' => 'Se necesita un nombre para el genero.',
-                'genero.unique' => 'Ya existe un genero con este nombre, revise la base de datos por favor.'
+                'nombre.required' => 'Se necesita un nombre para el genero.',
+                'nombre.unique' => 'Ya existe un genero con este nombre, revise la base de datos por favor.'
             ]
         );
 
         $input = $request->all();
+
 
         $genero = new Genero;
 
@@ -66,11 +67,11 @@ class DecoradorController extends Controller
 
         $request->validate(
             [
-                'plataforma' => 'required|unique:plataforma',
+                'nombre' => 'required|unique:plataforma',
             ],
             [
-                'plataforma.required' => 'Se necesita un nombre para la plataforma.',
-                'plataforma.unique' => 'Ya existe una plataforma con este nombre, revise la base de datos por favor.'
+                'nombre.required' => 'Se necesita un nombre para la plataforma.',
+                'nombre.unique' => 'Ya existe una plataforma con este nombre, revise la base de datos por favor.'
             ]
         );
 
@@ -94,11 +95,11 @@ class DecoradorController extends Controller
 
         $request->validate(
             [
-                'editor' => 'required|unique:editor',
+                'nombre' => 'required|unique:editor',
             ],
             [
-                'editor.required' => 'Se necesita un nombre para el editor.',
-                'editor.unique' => 'Ya existe un editor con este nombre, revise la base de datos por favor.'
+                'nombre.required' => 'Se necesita un nombre para el editor.',
+                'nombre.unique' => 'Ya existe un editor con este nombre, revise la base de datos por favor.'
             ]
         );
 
@@ -122,11 +123,11 @@ class DecoradorController extends Controller
 
         $request->validate(
             [
-                'desarrollador' => 'required|unique:desarrollador',
+                'nombre' => 'required|unique:desarrollador',
             ],
             [
-                'desarrollador.required' => 'Se necesita un nombre para el desarrollador.',
-                'desarrollador.unique' => 'Ya existe un desarrollador con este nombre, revise la base de datos por favor.'
+                'nombre.required' => 'Se necesita un nombre para el desarrollador.',
+                'nombre.unique' => 'Ya existe un desarrollador con este nombre, revise la base de datos por favor.'
             ]
         );
 

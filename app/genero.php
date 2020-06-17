@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class genero extends Model
+class Genero extends Model
 {
     protected $table = 'genero';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['nombre'];
 }

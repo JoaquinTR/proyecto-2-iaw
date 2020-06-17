@@ -22,6 +22,16 @@ class GameController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Retorna una vista con todos los juegos en la base de datos.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index(){
+        $juegos = Juego::all();
+        return view('dashboard.allGames',compact('juegos'));
+    }
+
 
     /**
      * Muestra el formulario de carga de un juego nuevo.
@@ -83,5 +93,45 @@ class GameController extends Controller
         $juego->save();
 
         return back()->with('success', 'Juego creado correctamente.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $updateData = $request->validate([
+            'nombre' => 'required',
+            'imagen' => 'required',
+            'genero' => 'required',
+            'fecha_lanzamiento' => 'required',
+            'descripcion' => 'required',
+            'plataforma' => 'required',
+            'editor' => 'required',
+            'desarrollador' => 'required'
+        ],[
+            //setear todos los mensajes de error https://www.positronx.io/php-laravel-crud-operations-mysql-tutorial/
+        ]);
+
+        Juego::whereId($id)->update($updateData);
+        return redirect('/dashboard/games/all')->with('success', 'Se ha actualizado correctamente el juego.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $juego = Juego::findOrFail($id);
+        $juego->delete();
+
+        return redirect('/dashboard/games/all')->with('success', 'Se ha eliminado correctamente el juego.');
     }
 }

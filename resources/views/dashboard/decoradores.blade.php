@@ -24,9 +24,9 @@
 
                         <div class="form-group">
                             <label>Nombre genero:</label>
-                            <input type="text" name="genero" class="form-control">
-                            @if ($errors->has('genero'))
-                                <span class="text-danger">{{ $errors->first('genero') }}</span>
+                            <input type="text" name="nombre" class="form-control">
+                            @if ($errors->has('nombre'))
+                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
                         </div>
 
@@ -41,9 +41,9 @@
 
                         <div class="form-group">
                             <label>Nombre plataforma:</label>
-                            <input type="text" name="plataforma" class="form-control">
-                            @if ($errors->has('plataforma'))
-                                <span class="text-danger">{{ $errors->first('plataforma') }}</span>
+                            <input type="text" name="nombre" class="form-control">
+                            @if ($errors->has('nombre'))
+                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
                         </div>
 
@@ -58,9 +58,9 @@
 
                         <div class="form-group">
                             <label>Nombre editor:</label>
-                            <input type="text" name="editor" class="form-control">
-                            @if ($errors->has('editor'))
-                                <span class="text-danger">{{ $errors->first('editor') }}</span>
+                            <input type="text" name="nombre" class="form-control">
+                            @if ($errors->has('nombre'))
+                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
                         </div>
 
@@ -74,9 +74,9 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label>Nombre desarrollador:</label>
-                            <input type="text" name="desarrollador" class="form-control">
-                            @if ($errors->has('desarrollador'))
-                                <span class="text-danger">{{ $errors->first('desarrollador') }}</span>
+                            <input type="text" name="nombre" class="form-control">
+                            @if ($errors->has('nombre'))
+                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
                         </div>
 
