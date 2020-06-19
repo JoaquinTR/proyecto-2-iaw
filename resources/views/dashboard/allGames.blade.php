@@ -1,10 +1,6 @@
 @extends('dashboard')
 
 @section('seleccion-perfil')
-<style>
-  .push-top {
-    margin-top: 50px;
-  }
 </style>
 
 <div class="container">
@@ -38,10 +34,18 @@
                     </div>
                 </div>
 
+                @include('components.confirmacion')
                 @include('components.flash-message')
 
+                <div class="content px-3 pb-3">
+                    <a href="{{ route('dashboard.game.new') }}" class="btn btn-primary btn-sm" title="nuevo juego">
+                        <i class="far fa-edit"></i> Cargar nuevo juego
+                    </a>
+                </div>
+
+
                 {{-- Tabla cargada utilizando datatables (ver scripts al pie de página) --}}
-                <table id="dt-juego" class="table table-striped table-sm table-bordered table-dark">
+                <table id="dt-juego" class="table table-striped table-sm table-bordered table-dark h6" style="width: 100% ">
                     <thead>
                         <tr>
                             <th class='text-center'>id</th>
@@ -52,6 +56,7 @@
                             <th class='text-center'>plataforma</th>
                             <th class='text-center'>editor</th>
                             <th class='text-center'>desarrollador</th>
+                            <th class='text-center'>puntaje</th>
                             <th class='text-center'>control</th>
                         </tr>
                     </thead>
@@ -71,20 +76,18 @@
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
     var juegos = {!! json_encode($juegos); !!}; //paso los datos parseados como json
-    var editURL = '{!! route('dashboard.game.edit',":id") !!}';
-    var deleteURL = '{!! route('dashboard.game.delete',":id") !!}';
 
     //la siguiente plantilla la utilizo como acciones dentro de la datatable
     //el string :id va a ser reemplazado via js por el id de la fila!
-    var plantillaForm = `<form action="{{ route('dashboard.game.delete',":id") }}" method="post" style="display: inline-block">
+    var plantillaForm = `<form name="form_:id" action="{{ route('dashboard.game.delete',":id") }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <div class="btn-group" role="group" aria-label="opciones">
 
-                                        <a href="{{ route('dashboard.game.edit',":id") }}" class="btn btn-primary btn-sm"">
+                                        <a href="{{ route('dashboard.game.edit',":id") }}" class="btn btn-primary btn-sm" title="editar">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <button class="btn btn-danger btn-sm"" type="submit">
+                                        <button id="submit_:id" form="form_:id" class="btn btn-danger btn-sm" title="borrar" onclick="showConfirmacion(this)">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
 

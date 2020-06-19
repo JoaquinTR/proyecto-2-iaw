@@ -10,7 +10,7 @@ class juego extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre', 'imagen', 'genero','fecha_lanzamiento', 'descripcion','plataforma','editor','desarrollador'
+        'nombre', 'genero','fecha_lanzamiento', 'descripcion','plataforma','editor','desarrollador','puntaje','cant_calificaciones'
     ];
 
     /**
@@ -19,5 +19,13 @@ class juego extends Model
     public function calificaciones()
     {
         return $this->hasMany('App\calificacion');
+    }
+
+    /**
+     * Obtener las imágenes que fueron cargadas a este juego.
+     */
+    public function imagenes()
+    {
+        return $this->hasMany('App\Image');
     }
 }

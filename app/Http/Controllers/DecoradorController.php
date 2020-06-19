@@ -21,12 +21,25 @@ class DecoradorController extends Controller
     }
 
     /**
-     * Muestra los formularios de creación de decoradores.
+     * Muestra las tablas de decoradores.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        return view('dashboard.decoradores');
+        $generos = Genero::all();
+        $plataformas = Plataforma::all();
+        $editores = Editor::all();
+        $desarrolladores = Desarrollador::all();
+        return view('dashboard.allDecoradores',compact('generos','plataformas','editores','desarrolladores'));
+    }
+
+    /**
+     * Muestra los formularios de creación de decoradores.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function newDecorador(){
+        return view('dashboard.newDecorador');
     }
 
     /**
@@ -140,5 +153,32 @@ class DecoradorController extends Controller
         $desarrollador->save();
 
         return back()->with('success', 'Desarrollador creado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @param  int  $tipo
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteDecorador($id,$tipo)
+    {
+        switch((string)$tipo){
+            case'genero':
+                Genero::findOrFail($id)->delete();
+            break;
+            case'plataforma':
+                Plataforma::findOrFail($id)->delete();
+            break;
+            case'editor':
+                Editor::findOrFail($id)->delete();
+            break;
+            case'desarrollador':
+                Desarrollador::findOrFail($id)->delete();
+            break;
+        }
+
+        return redirect(route('dashboard.decoradores.all'))->with('success', 'Se ha eliminado correctamente el recurso.');
     }
 }

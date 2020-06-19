@@ -24,13 +24,14 @@ class JuegoSeeder extends Seeder
         foreach (range(0, 4) as $i) {
             DB::table('juego')->insert([
                 'nombre' => $juegos->{"$i"}->{"name"},
-                'imagen' => "$i",   //esta imagen debe ser buscada en la tabla de imágenes.
                 'genero' => json_encode($juegos->{"$i"}->{"genres"}),
                 'fecha_lanzamiento' => $juegos->{"$i"}->{"release_date"},
                 'descripcion'=> $juegos->{"$i"}->{"description"},
                 'plataforma'=> json_encode($juegos->{"$i"}->{"platform"}),
                 'editor'=> json_encode($juegos->{"$i"}->{"publishers"}),
-                'desarrollador'=> json_encode($juegos->{"$i"}->{"developers"})
+                'desarrollador'=> json_encode($juegos->{"$i"}->{"developers"}),
+                'puntaje' => 0,
+                'cant_calificaciones' => 0,
             ]);
         }
     }

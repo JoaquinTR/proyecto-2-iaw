@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             GeneroSeeder::class,
             PlataformaSeeder::class,
             EditorSeeder::class,
-            DesarrolladorSeeder::class
+            DesarrolladorSeeder::class,
+            ImageSeeder::class
         ]);
     }
 }

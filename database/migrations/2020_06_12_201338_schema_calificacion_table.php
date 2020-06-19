@@ -14,9 +14,9 @@ class SchemaCalificacionTable extends Migration
     public function up()
     {
         Schema::table('calificacion', function (Blueprint $table) {
-            $table->foreign('id_juego')->references('id')->on('juego');
+            $table->foreign('juego_id')->references('id')->on('juego')->onDelete('cascade');
 
-            $table->foreign('autor')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

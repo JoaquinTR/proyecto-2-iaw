@@ -49,14 +49,20 @@
 
                     <div class="p-2 d-flex flex-column">
                         <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
-                                Cargar juego
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game.all') }}">
+                                Administrar juegos
+                            </a>
+                        </div>
+
+                        <div class="mt-2">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.image.all') }}">
+                                Administrar imágenes
                             </a>
                         </div>
 
                         <div class="my-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.decoradores') }}">
-                                Cargar decoradores de juegos
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.decoradores.all') }}">
+                                Administrar decoradores de juegos
                             </a>
                         </div>
                     </div>
@@ -66,39 +72,17 @@
                     <div class="p-2 d-flex flex-column">
 
                         <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.usuarios') }}">
                                 Ver usuarios
                             </a>
                         </div>
 
-                        <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
+                        <div class="my-2">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.calificacion.all') }}">
                                 Ver calificaciones
                             </a>
                         </div>
 
-                        <div class="my-2">
-                            <a class="btn btn-danger  btn-block" href="{{ route('dashboard.game') }}">
-                                BAN HAMMER
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <hr/>
-
-                    <div class="p-2 d-flex flex-column">
-                        <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game.all') }}">
-                                Ver juegos
-                            </a>
-                        </div>
-
-                        <div class="mt-2">
-                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.game') }}">
-                                Ver decoradores de juegos
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

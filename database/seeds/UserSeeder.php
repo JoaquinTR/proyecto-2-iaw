@@ -17,7 +17,9 @@ class UserSeeder extends Seeder
                 'name' => 'invitado'.$id,
                 'email' => 'invitado'.$id.'@gmail.com',
                 'password' => Hash::make('invitado'.$id.'invitado'.$id),
-                'type' => 'default'
+                'type' => 'default',
+                'created_at' => Carbon\Carbon::now(),
+                'updated_at' => Carbon\Carbon::now()
             ]);
         }
 
@@ -26,14 +28,18 @@ class UserSeeder extends Seeder
             'name' => 'administrador',
             'email' => 'administrador@gmail.com',
             'password' => Hash::make('adminadmin'),
-            'type' => 'admin'
+            'type' => 'admin',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now()
         ]);
 
         DB::table('users')->insert([
             'name' => 'jefecito',
             'email' => 'joaquintricerri@gmail.com',
             'password' => Hash::make('test1test1'),
-            'type' => 'admin'
+            'type' => 'admin',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now()
         ]);
     }
 }

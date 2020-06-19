@@ -41,14 +41,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Id del repositorio de imágenes:</label>
-                            <input type="text" name="imagen" class="form-control" placeholder="">
-                            @if ($errors->has('imagen'))
-                                <span class="text-danger">{{ $errors->first('imagen') }}</span>
-                            @endif
-                        </div>
-
-                        <div class="form-group">
                             <label for="generos" class="control-label">Genero(s):</label>
                             <select name="generos_id[]" class="form-control" multiple="multiple" id="generos">
                                 @foreach ($generos as $i => $genero)

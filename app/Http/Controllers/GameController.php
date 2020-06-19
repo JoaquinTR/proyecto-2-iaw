@@ -81,12 +81,13 @@ class GameController extends Controller
 
         $juego->nombre = $input["nombre"];
         $juego->descripcion = $input["desc"];
-        $juego->imagen = $input["imagen"];
         $juego->fecha_lanzamiento = $input["date"];
         $juego->genero = json_encode($input["generos_id"], JSON_UNESCAPED_UNICODE );
         $juego->plataforma = json_encode($input["plataformas_id"], JSON_UNESCAPED_UNICODE );
         $juego->editor = json_encode($input["editores_id"], JSON_UNESCAPED_UNICODE );
         $juego->desarrollador = json_encode($input["desarrolladores_id"], JSON_UNESCAPED_UNICODE );
+        $juego->puntaje = 0;
+        $juego->cant_calificaciones = 0;
 
         //dd($juego);
         $juego->save();
@@ -110,6 +111,7 @@ class GameController extends Controller
         $desarrolladores = Desarrollador::all();
         return view('dashboard.editGame',compact('generos','plataformas','editores','desarrolladores','juego'));
     }
+
     /**
      * Update the specified resource in storage.
      *

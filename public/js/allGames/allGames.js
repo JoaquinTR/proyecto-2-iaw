@@ -3,7 +3,7 @@ $(document).ready(function() {
     //indico como construir la tabla en base a los juegos recibidos
     $('#dt-juego').DataTable({
         paging: true,
-        autoWidth: true,
+        autoWidth: false,
         processing: true,
         responsive: true,
         deferRender: true,
@@ -14,7 +14,6 @@ $(document).ready(function() {
         {
             data: 'id',
             class: 'text-center',
-            attribute: 'data-id=100',
             name: 'id',
             render: function ( data, type, row ) {
                 return  data;
@@ -38,8 +37,8 @@ $(document).ready(function() {
             data: 'genero',
             class: 'p-0',
             render: function ( data, type, row ) {
-                let dataF = (data.length<=20) ? data : data.substring(0,20)+"[...]";
-                return  `<div class="position-relative p-3">
+                let dataF = (data.length<=20) ? data : data.substring(0,10)+"[...]";
+                return  `<div class="position-relative px-1">
                             <a href="#" class="text-info stretched-link">
                                 ${dataF}
                             </a>
@@ -50,8 +49,8 @@ $(document).ready(function() {
             data: 'descripcion',
             class: 'p-0',
             render: function ( data, type, row ) {
-                let dataF = (data.length<=20) ? data : data.substring(0,20)+"[...]";
-                return  `<div class="position-relative p-3">
+                let dataF = (data.length<=20) ? data : data.substring(0,10)+"[...]";
+                return  `<div class="position-relative px-1">
                             <a href="#" class="text-info stretched-link">
                                 ${dataF}
                             </a>
@@ -62,8 +61,8 @@ $(document).ready(function() {
             data: 'plataforma',
             class: 'p-0',
             render: function ( data, type, row ) {
-                let dataF = (data.length<=20) ? data : data.substring(0,20)+"[...]";
-                return  `<div class="position-relative p-3">
+                let dataF = (data.length<=20) ? data : data.substring(0,10)+"[...]";
+                return  `<div class="position-relative px-1">
                             <a href="#" class="text-info stretched-link">
                                 ${dataF}
                             </a>
@@ -74,8 +73,8 @@ $(document).ready(function() {
             data: 'editor',
             class: 'p-0',
             render: function ( data, type, row ) {
-                let dataF = (data.length<=20) ? data : data.substring(0,20)+"[...]";
-                return  `<div class="position-relative p-3">
+                let dataF = (data.length<=20) ? data : data.substring(0,10)+"[...]";
+                return  `<div class="position-relative px-1">
                             <a href="#" class="text-info stretched-link">
                                 ${dataF}
                             </a>
@@ -86,12 +85,23 @@ $(document).ready(function() {
             data: 'desarrollador',
             class: 'p-0',
             render: function ( data, type, row ) {
-                let dataF = (data.length<=20) ? data : data.substring(0,20)+"[...]";
-                return  `<div class="position-relative p-3">
+                let dataF = (data.length<=20) ? data : data.substring(0,10)+"[...]";
+                return  `<div class="position-relative px-1">
                             <a href="#" class="text-info stretched-link">
                                 ${dataF}
                             </a>
                         </div>`;
+            }
+        },
+        {
+            data: 'puntaje',
+            class: 'text-center',
+            render: function ( data, type, row ) {
+                let puntaje = row.puntaje;
+                if((puntaje != 0) && (row.cant_calificaciones >0)){
+                    puntaje = puntaje / row.cant_calificaciones;
+                }
+                return  puntaje.toFixed(2);
             }
         },
         {
@@ -120,4 +130,32 @@ $(document).ready(function() {
         $('#modal-info-content').html(contenido);
         $('#modal-info').modal("show");
     });
+
 });
+
+/**
+ * Controla la confirmación de eliminado.
+ */
+function showConfirmacion(elemento){
+    const modal = new Promise(function(resolve) {
+        $("#modal_confirmar").modal("show");
+
+        $("#modal_confirmar_cerrar").click(function() {
+            resolve(false);
+        });
+
+        $("#modal_confirmar_eliminar").click(function() {
+            resolve(true);
+        });
+
+        $('#modal_confirmar').on('hidden.bs.modal', function() {
+            resolve(false);
+        });
+
+    }).then(function(seleccion) {
+        $("#modal_confirmar").modal("hide");
+        if(seleccion){
+            $('form[name='+elemento.getAttribute("form")+']').submit();
+        }
+    });
+}

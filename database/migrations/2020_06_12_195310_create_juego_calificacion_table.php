@@ -16,20 +16,21 @@ class CreateJuegoCalificacionTable extends Migration
         Schema::create('juego', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            $table->string('imagen')->nullable()->default(null);
             $table->longText('genero');
             $table->date('fecha_lanzamiento');
             $table->longText('descripcion');
             $table->longText('plataforma');
             $table->longText('editor');
             $table->longText('desarrollador');
+            $table->unsignedBigInteger('puntaje');
+            $table->unsignedBigInteger('cant_calificaciones');
             $table->timestamps();
         });
 
         Schema::create('calificacion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('autor');
-            $table->unsignedBigInteger('id_juego');
+            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('juego_id');
             $table->longText('reseña');
             $table->longText('descripcion');
             $table->string('puntaje');

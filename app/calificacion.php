@@ -11,7 +11,7 @@ class calificacion extends Model
 
     //tipo = jugador o no
     protected $fillable = [
-        'autor','id_juego', 'descripcion','reseña','puntaje','tipo'
+        'users_id','juego_id', 'descripcion','reseña','puntaje','tipo'
     ];
 
     /**
@@ -20,5 +20,13 @@ class calificacion extends Model
     public function juego()
     {
         return $this->belongsTo('App\juego');
+    }
+
+    /**
+     * Obtener el usuario que creó esta calificacion.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

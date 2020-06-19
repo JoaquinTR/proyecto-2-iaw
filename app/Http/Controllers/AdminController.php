@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -24,5 +25,27 @@ class AdminController extends Controller
     public function index()
     {
         return view('dashboard');
+    }
+
+    /**
+     * Devuelve la vista de todos los usuarios.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function allUsers(){
+        $users = User::all();
+        return view('dashboard.allUsers',compact('users'));
+    }
+
+    /**
+     * Convierte a un usuario en admin.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function adminificar($id){
+        $user = User::findOrFail($id);
+        $user->type = "admin";
+        $user->save();
+        return redirect(route('dashboard.usuarios'))->with('success', 'Se ha convertido el usuario en administrador correctamente.');
     }
 }

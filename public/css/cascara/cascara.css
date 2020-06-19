@@ -60,3 +60,7 @@ div.card div hr{
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+table.dataTable {
+    margin: 0 auto;
+  }

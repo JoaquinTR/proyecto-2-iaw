@@ -31,27 +31,28 @@ Route::get('/dashboard/games/all', 'GameController@index')->middleware('is_admin
 Route::get('/dashboard/games/edit/{id}', 'GameController@updateIndex')->middleware('is_admin')->name('dashboard.game.edit');
 Route::post('/dashboard/games/edit/{id}', 'GameController@update')->middleware('is_admin')->name('dashboard.game.edit');
 Route::delete('/dashboard/games/delete/{id}', 'GameController@destroy')->middleware('is_admin')->name('dashboard.game.delete');
-Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('is_admin')->name('dashboard.game');
-Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('is_admin')->name('dashboard.game');
+Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('is_admin')->name('dashboard.game.new');
+Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('is_admin')->name('dashboard.game.new');
 
-Route::get('/decoradores', 'DecoradorController@index')->middleware('is_admin')->name('dashboard.decoradores');
+Route::get('/dashboard/images/all', 'ImageController@index')->middleware('is_admin')->name('dashboard.image.all');
+Route::get('/dashboard/images/ver/{id}', 'ImageController@verImagen')->middleware('is_admin')->name('dashboard.image.ver');
+Route::delete('/dashboard/images/delete/{id}', 'ImageController@destroy')->middleware('is_admin')->name('dashboard.image.delete');
+Route::get('/dashboard/images/new', 'ImageController@newImage')->middleware('is_admin')->name('dashboard.image.new');
+Route::post('/dashboard/images/new', 'ImageController@newImageCreate')->middleware('is_admin')->name('dashboard.image.new');
+
+Route::get('/decoradores/all', 'DecoradorController@index')->middleware('is_admin')->name('dashboard.decoradores.all');
+Route::get('/decoradores/new', 'DecoradorController@newDecorador')->middleware('is_admin')->name('dashboard.decoradores.new');
+Route::delete('/decoradores/delete/{id}/{tipo}', 'DecoradorController@deleteDecorador')->middleware('is_admin')->name('dashboard.decoradores.delete');
 Route::post('/decoradores/genero', 'DecoradorController@createGenero')->middleware('is_admin')->name('dashboard.decoradores.genero');
 Route::post('/decoradores/plataforma', 'DecoradorController@createPlataforma')->middleware('is_admin')->name('dashboard.decoradores.plataforma');
 Route::post('/decoradores/editor', 'DecoradorController@createEditor')->middleware('is_admin')->name('dashboard.decoradores.editor');
 Route::post('/decoradores/desarrollador', 'DecoradorController@createDesarrollador')->middleware('is_admin')->name('dashboard.decoradores.desarrollador');
 
+Route::get('/dashboard/usuarios', 'AdminController@allUsers')->middleware('is_admin')->name('dashboard.usuarios');
+Route::post('/dashboard/usuarios/adminificar/{id}', 'AdminController@adminificar')->middleware('is_admin')->name('dashboard.usuarios.adminificar');
+
+Route::get('/dashboard/calificaciones/all', 'CalificacionController@index')->middleware('is_admin')->name('dashboard.calificacion.all');
+
 Route::get('/verify', function () {
     return view('auth.verify');
 })->middleware('is_user')->name('verify');
-
-
-Route::get('generos', function (Illuminate\Http\Request  $request) {
-    $term = $request->term ?: '';
-    $generos = App\Plataforma::where('nombre', 'like', $term.'%')->get();
-    $results["results"] = [];
-
-    foreach ($generos as $genero) {
-        $results["results"][] = ['id' => $genero->{"id"}, 'text' => $genero->{"nombre"}];
-    }
-    return \Response::json($results);
-})->middleware('is_admin')->name("generos");
