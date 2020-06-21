@@ -23,13 +23,33 @@ class GameController extends Controller
     }
 
     /**
-     * Retorna una vista con todos los juegos en la base de datos.
+     * Retorna una vista con todos los juegos en la base de datos. Panel admin.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
         $juegos = Juego::all();
         return view('dashboard.allGames',compact('juegos'));
+    }
+
+    /**
+     * Retorna una vista con la pantalla principal de juegos.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function main(){
+        return view('games');
+    }
+
+    /**
+     * Retorna una vista principal de un juego.
+     *
+     * @param $id El id del juego en cuestión.
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function juego(Request $request, $id){
+        $juego = Juego::findOrFail($id);
+        return view('games.game',compact('juego'));
     }
 
     /**
@@ -86,6 +106,8 @@ class GameController extends Controller
         $juego->plataforma = json_encode($input["plataformas_id"], JSON_UNESCAPED_UNICODE );
         $juego->editor = json_encode($input["editores_id"], JSON_UNESCAPED_UNICODE );
         $juego->desarrollador = json_encode($input["desarrolladores_id"], JSON_UNESCAPED_UNICODE );
+        $juego->created_at = now();
+        $juego->updated_at = now();
         $juego->puntaje = 0;
         $juego->cant_calificaciones = 0;
 
@@ -155,6 +177,7 @@ class GameController extends Controller
         $juego->plataforma = json_encode($input["plataformas_id"], JSON_UNESCAPED_UNICODE );
         $juego->editor = json_encode($input["editores_id"], JSON_UNESCAPED_UNICODE );
         $juego->desarrollador = json_encode($input["desarrolladores_id"], JSON_UNESCAPED_UNICODE );
+        $juego->updated_at = now();
 
         $juego->save();
         //Juego::whereId($id)->update($juego);
@@ -175,4 +198,6 @@ class GameController extends Controller
 
         return redirect('/dashboard/games/all')->with('success', 'Se ha eliminado correctamente el juego.');
     }
+
+
 }

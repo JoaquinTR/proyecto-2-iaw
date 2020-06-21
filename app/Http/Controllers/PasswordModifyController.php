@@ -57,7 +57,8 @@ class PasswordModifyController extends Controller
 
         // Lleno el modelo de usuario
         $user->fill([
-            'password' => $input['password']
+            'password' => $input['password'],
+            'updated_at' => now()
         ]);
 
         // Grabo en la base de datos

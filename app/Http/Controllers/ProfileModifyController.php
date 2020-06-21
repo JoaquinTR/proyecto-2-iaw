@@ -52,7 +52,8 @@ class ProfileModifyController extends Controller
 
         // Lleno el modelo de usuario
         $user->fill([
-            'name' => $input['name']
+            'name' => $input['name'],
+            'updated_at' => now()
         ]);
 
         // Grabo en la base de datos
@@ -86,7 +87,8 @@ class ProfileModifyController extends Controller
 
         // Lleno el modelo de usuario
         $user->fill([
-            'email' => $input['email']
+            'email' => $input['email'],
+            'updated_at' => now()
         ]);
 
         // Grabo en la base de datos

@@ -32,6 +32,9 @@ class JuegoSeeder extends Seeder
                 'desarrollador'=> json_encode($juegos->{"$i"}->{"developers"}),
                 'puntaje' => 0,
                 'cant_calificaciones' => 0,
+                'rating' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
         }
     }

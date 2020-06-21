@@ -24,6 +24,7 @@ class CreateJuegoCalificacionTable extends Migration
             $table->longText('desarrollador');
             $table->unsignedBigInteger('puntaje');
             $table->unsignedBigInteger('cant_calificaciones');
+            $table->float('rating', 2, 2); //entre 0,00 y 10,00
             $table->timestamps();
         });
 

@@ -65,6 +65,8 @@ class DecoradorController extends Controller
         $genero = new Genero;
 
         $genero->nombre = $input["nombre"];
+        $genero->created_at = now();
+        $genero->updated_at = now();
 
         $genero->save();
 
@@ -93,6 +95,8 @@ class DecoradorController extends Controller
         $plataforma = new Plataforma;
 
         $plataforma->nombre = $input["nombre"];
+        $plataforma->created_at = now();
+        $plataforma->updated_at = now();
 
         $plataforma->save();
 
@@ -121,6 +125,8 @@ class DecoradorController extends Controller
         $editor = new Editor;
 
         $editor->nombre = $input["nombre"];
+        $editor->created_at = now();
+        $editor->updated_at = now();
 
         $editor->save();
 
@@ -149,6 +155,8 @@ class DecoradorController extends Controller
         $desarrollador = new Desarrollador;
 
         $desarrollador->nombre = $input["nombre"];
+        $desarrollador->created_at = now();
+        $desarrollador->updated_at = now();
 
         $desarrollador->save();
 

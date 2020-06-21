@@ -53,6 +53,10 @@ Route::post('/dashboard/usuarios/adminificar/{id}', 'AdminController@adminificar
 
 Route::get('/dashboard/calificaciones/all', 'CalificacionController@index')->middleware('is_admin')->name('dashboard.calificacion.all');
 
+Route::get('/games', 'GameController@main')->name('games'); //pantalla principal de todos los juegos
+Route::get('/games/{id}', 'GameController@juego')->name('game'); //pantalla principal de un juego
+
+//Verificación de mail de usuario
 Route::get('/verify', function () {
     return view('auth.verify');
 })->middleware('is_user')->name('verify');

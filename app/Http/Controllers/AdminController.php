@@ -45,6 +45,7 @@ class AdminController extends Controller
     public function adminificar($id){
         $user = User::findOrFail($id);
         $user->type = "admin";
+        $user->updated_at = now();
         $user->save();
         return redirect(route('dashboard.usuarios'))->with('success', 'Se ha convertido el usuario en administrador correctamente.');
     }

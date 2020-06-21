@@ -31,7 +31,7 @@
 
 </head>
 <body>
-    <div id="app" class="d-flex flex-column full-size">
+    <div id="app" class="">
         <nav class="navbar pull-left navbar-expand-md navbar-dark shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand game-font mr-4" href="{{ url('/') }}">
@@ -45,13 +45,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto back-fix">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Juegos</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Calificaciones</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Noticias</a>
+                            <a class="nav-link" href="{{ route('games') }}">Juegos</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#">Pedidos</a>
@@ -104,16 +98,19 @@
             </div>
         </nav>
 
+        @yield('body')
+
         <main class="py-4">
             @yield('content')
         </main>
 
-        {{-- footer begin --}}
-        <footer class="footer bg-dark d-flex justify-content-center mt-auto">
-            <span class="game-font text-light">© Game Place</span>
-        </footer>
-        {{-- footer end --}}
+
     </div>
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="flex-shrink: none;">
+        <div class="container text-center">
+            <span class="game-font text-light">© Gaming Place</span>
+        </div>
+      </footer>
 
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')

@@ -84,6 +84,8 @@ class ImageController extends Controller
             $i->nombre_vista = $input["nombre"];
             $i->juego_id = $input["juego_id"];
             $i->imagen = $foto;
+            $i->created_at = now();
+            $i->updated_at = now();
             $i->save();
 
             return redirect(route('dashboard.image.all'))->with('success', 'Imagen cargada correctamente.');

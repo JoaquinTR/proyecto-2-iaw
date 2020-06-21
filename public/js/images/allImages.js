@@ -68,7 +68,6 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(result){
-                console.log(result.imagen);
                 let img = "data:image/png;base64, "+result.imagen;
                 $('#imagen').attr("src",img);
                 $('#modal-img').modal("show");
@@ -78,6 +77,10 @@ $(document).ready(function() {
                 alert("ocurrió un error: "+errorThrown);
             }
         });
+    });
+
+    $('#modal-img').on('hidden.bs.modal', function () {
+        $('#imagen').attr("src",'');
     });
 
 });
