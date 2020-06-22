@@ -44,7 +44,7 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
-    var users = {!! json_encode($users); !!}; //paso los datos parseados como json
+    var url = '{!! route('dashboard.usuarios.ajax') !!}';
 
     //la siguiente plantilla la utilizo como acciones dentro de la datatable
     //el string :id va a ser reemplazado via js por el id de la fila!

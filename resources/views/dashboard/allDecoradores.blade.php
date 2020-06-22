@@ -107,10 +107,12 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
-    var generos = {!! json_encode($generos); !!}; //paso los datos parseados como json
-    var plataformas = {!! json_encode($plataformas); !!}; //paso los datos parseados como json
-    var editores = {!! json_encode($editores); !!}; //paso los datos parseados como json
-    var desarrolladores = {!! json_encode($desarrolladores); !!}; //paso los datos parseados como json
+
+    //urls de búsqueda de datos.
+    var urlGeneros = '{!! route('dashboard.decoradores.genero.ajax')  !!}';
+    var urlPlataformas = '{!! route('dashboard.decoradores.plataforma.ajax')  !!}';
+    var urlEditores = '{!! route('dashboard.decoradores.editor.ajax')  !!}';
+    var urlDesarrolladores = '{!! route('dashboard.decoradores.desarrollador.ajax')  !!}';
 
     //la siguiente plantilla la utilizo como acciones dentro de la datatable
     //el string :id va a ser reemplazado via js por el id de la fila!

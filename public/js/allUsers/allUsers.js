@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log(users);
     //indico como construir la tabla en base a los juegos recibidos
     $('#dt-user').DataTable({
         paging: true,
@@ -9,7 +8,14 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: users,
+        ajax: {
+            url: url,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
         columns: [
         {
             data: 'id',

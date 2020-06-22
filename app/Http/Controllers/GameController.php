@@ -8,6 +8,7 @@ use App\Plataforma;
 use App\Editor;
 use App\Desarrollador;
 use App\Juego;
+use App\Image;
 
 class GameController extends Controller
 {
@@ -19,7 +20,7 @@ class GameController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -28,8 +29,7 @@ class GameController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $juegos = Juego::all();
-        return view('dashboard.allGames',compact('juegos'));
+        return view('dashboard.allGames');
     }
 
     /**
@@ -47,9 +47,27 @@ class GameController extends Controller
      * @param $id El id del juego en cuestión.
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function juego(Request $request, $id){
+    public function juegoDetalles(Request $request, $id){
+
         $juego = Juego::findOrFail($id);
-        return view('games.game',compact('juego'));
+        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
+        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
+
+        return view('games.gameDetails',compact('juego','imagen_principal','imagen_fondo'));
+    }
+
+    /**
+     * Retorna una vista principal de un juego.
+     *
+     * @param $id El id del juego en cuestión.
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function juegoReview(Request $request, $id){
+        $juego = Juego::findOrFail($id);
+        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
+        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
+        /* dd($imagen_fondo); */
+        return view('games.gameReviews',compact('juego','imagen_principal','imagen_fondo'));
     }
 
     /**
@@ -126,12 +144,11 @@ class GameController extends Controller
      */
     public function updateIndex(Request $request, $id)
     {
-        $juego = Juego::find($id);
         $generos = Genero::all();
         $plataformas = Plataforma::all();
         $editores = Editor::all();
         $desarrolladores = Desarrollador::all();
-        return view('dashboard.editGame',compact('generos','plataformas','editores','desarrolladores','juego'));
+        return view('dashboard.editGame',compact('generos','plataformas','editores','desarrolladores','id'));
     }
 
     /**
@@ -199,5 +216,29 @@ class GameController extends Controller
         return redirect('/dashboard/games/all')->with('success', 'Se ha eliminado correctamente el juego.');
     }
 
+    /**
+     * Retorna los juegos ante una consulta ajax.
+     */
+    public function ajaxJuegos(Request $request){
+        if($request->ajax()){
+            $juegos = Juego::all();
+            return \Response::json($juegos);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
+    }
 
+    /**
+     * Retorna el juego con el id proporcionado ante una consulta ajax.
+     */
+    public function ajaxJuego(Request $request, $id){
+        if($request->ajax()){
+            $juego = Juego::findOrFail($id);
+            return \Response::json($juego);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
+    }
 }

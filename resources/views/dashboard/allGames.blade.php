@@ -75,10 +75,12 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
-    var juegos = {!! json_encode($juegos); !!}; //paso los datos parseados como json
+    //para el ajax de datatable
+    var url = '{!! route('dashboard.game.all.ajax') !!}';
 
     //la siguiente plantilla la utilizo como acciones dentro de la datatable
-    //el string :id va a ser reemplazado via js por el id de la fila!
+    //el string :id va a ser reemplazado via js por el id de la fila, si cambio una ruta
+    //el cambio se refleja automáticamente
     var plantillaForm = `<form name="form_:id" action="{{ route('dashboard.game.delete',":id") }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')

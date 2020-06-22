@@ -64,8 +64,7 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
-    var calificaciones = {!! json_encode($calificaciones); !!}; //paso los datos parseados como json
-
+    var url = '{!! route('dashboard.calificacion.all.ajax') !!}';
 </script>
 {{-- Código principal de esta página --}}
 <script src="{{ asset('js/allCalificaciones/allCalificaciones.js') }}"></script>

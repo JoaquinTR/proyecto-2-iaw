@@ -1,6 +1,7 @@
 $(document).ready(function () {
+    juego='';
     $('#reset-form').on('click', function(){
-        initInputs;
+        initInputs(juego);
     })
     $('#generos').select2({
         tags:true
@@ -19,8 +20,14 @@ $(document).ready(function () {
         clearBtn:true
     });
 
-
-    initInputs();
+    $.ajax({
+        url: url,
+        /* data: data, */
+        dataType: "json"
+      }).done(function( data ) {
+        juego=data;
+        initInputs();
+      });
 });
 
 /**

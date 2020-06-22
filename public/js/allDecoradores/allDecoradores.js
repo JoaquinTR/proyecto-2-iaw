@@ -8,7 +8,14 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: generos,
+        ajax: {
+            url: urlGeneros,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
         columns: [
         {
             data: 'id',
@@ -43,7 +50,14 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: plataformas,
+        ajax: {
+            url: urlPlataformas,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
         columns: [
         {
             data: 'id',
@@ -78,7 +92,14 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: editores,
+        ajax: {
+            url: urlEditores,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
         columns: [
         {
             data: 'id',
@@ -113,7 +134,14 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: desarrolladores,
+        ajax: {
+            url: urlDesarrolladores,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
         columns: [
         {
             data: 'id',

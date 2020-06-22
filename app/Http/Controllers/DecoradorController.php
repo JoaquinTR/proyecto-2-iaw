@@ -26,11 +26,7 @@ class DecoradorController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $generos = Genero::all();
-        $plataformas = Plataforma::all();
-        $editores = Editor::all();
-        $desarrolladores = Desarrollador::all();
-        return view('dashboard.allDecoradores',compact('generos','plataformas','editores','desarrolladores'));
+        return view('dashboard.allDecoradores');
     }
 
     /**
@@ -188,5 +184,57 @@ class DecoradorController extends Controller
         }
 
         return redirect(route('dashboard.decoradores.all'))->with('success', 'Se ha eliminado correctamente el recurso.');
+    }
+
+    /**
+     * Retorna los generos ante una consulta ajax.
+     */
+    public function ajaxGenero(Request $request){
+        if($request->ajax()){
+            $generos = Genero::all();
+            return \Response::json($generos);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
+    }
+
+    /**
+     * Retorna las plataformas ante una consulta ajax.
+     */
+    public function ajaxPlataforma(Request $request){
+        if($request->ajax()){
+            $plataformas = Plataforma::all();
+            return \Response::json($plataformas);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
+    }
+
+    /**
+     * Retorna los editores ante una consulta ajax.
+     */
+    public function ajaxEditor(Request $request){
+        if($request->ajax()){
+            $editores = Editor::all();
+            return \Response::json($editores);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
+    }
+
+    /**
+     * Retorna los desarrolladores ante una consulta ajax.
+     */
+    public function ajaxDesarrollador(Request $request){
+        if($request->ajax()){
+            $desarrolladores = Genero::all();
+            return \Response::json($desarrolladores);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
     }
 }

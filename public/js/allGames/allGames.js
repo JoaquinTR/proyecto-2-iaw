@@ -9,7 +9,31 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: juegos,
+        ajax: {
+            url: url,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
+        initComplete: function(settings, json) {
+            $('.stretched-link').on('click',function(event){
+                let celda = event.currentTarget.parentElement.parentElement; //celda de la datatable
+                let contenido = $('#dt-juego').dataTable().api().cell(celda).data();    //datos de la celda
+                if(contenido.includes("[")){
+                    contenido = contenido.replace(/(\[|\]|\")/g,''); //elimino los corchetes
+                    temp = contenido.split(",");
+                    contenido ="";
+                    for(idx in temp){
+                        contenido+= `<div class="p-1"><span class="badge badge-dark"><h6 class="mb-0">${temp[idx]}</h6></span></div> `;
+                    }
+                    console.log(contenido);
+                }
+                $('#modal-info-content').html(contenido);
+                $('#modal-info').modal("show");
+            });
+        },
         columns: [
         {
             data: 'id',
@@ -112,23 +136,6 @@ $(document).ready(function() {
             }
         }
         ]
-    });
-
-    $('.stretched-link').on('click',function(event){
-        let celda = event.currentTarget.parentElement.parentElement; //celda de la datatable
-        let contenido = $('#dt-juego').dataTable().api().cell(celda).data();    //datos de la celda
-        if(contenido.includes("[")){
-            //console.log(datos.splice())
-            contenido = contenido.replace(/(\[|\]|\")/g,''); //elimino los corchetes
-            temp = contenido.split(",");
-            contenido ="";
-            for(idx in temp){
-                contenido+= `<div class="p-1"><span class="badge badge-dark"><h6 class="mb-0">${temp[idx]}</h6></span></div> `;
-            }
-            console.log(contenido);
-        }
-        $('#modal-info-content').html(contenido);
-        $('#modal-info').modal("show");
     });
 
 });

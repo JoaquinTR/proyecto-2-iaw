@@ -1,15 +1,15 @@
 $(document).ready(function () {
     $('#generos').select2({
-        tags:true
+        tags:false
     });
     $('#plataformas').select2({
-        tags:true
+        tags:false
     });
     $('#editores').select2({
-        tags:true
+        tags:false
     });
     $('#desarrolladores').select2({
-        tags:true
+        tags:false
     });
     $("#datep").datepicker({
         format: 'yyyy/mm/dd',

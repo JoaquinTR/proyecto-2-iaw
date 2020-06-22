@@ -33,8 +33,7 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function allUsers(){
-        $users = User::all();
-        return view('dashboard.allUsers',compact('users'));
+        return view('dashboard.allUsers');
     }
 
     /**
@@ -48,5 +47,18 @@ class AdminController extends Controller
         $user->updated_at = now();
         $user->save();
         return redirect(route('dashboard.usuarios'))->with('success', 'Se ha convertido el usuario en administrador correctamente.');
+    }
+
+    /**
+     * Retorna los usuarios ante una consulta ajax.
+     */
+    public function ajaxUsers(Request $request){
+        if($request->ajax()){
+            $users = User::all();
+            return \Response::json($users);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
     }
 }

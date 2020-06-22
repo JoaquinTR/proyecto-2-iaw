@@ -27,8 +27,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $images = Image::select('id','nombre_vista','juego_id')->get();
-        return view('dashboard.allImages',compact('images'));
+        return view('dashboard.allImages');
     }
 
     /**
@@ -41,7 +40,6 @@ class ImageController extends Controller
     public function verImagen(Request $request, $id)
     {
         $imagen = Image::select('imagen')->findOrFail($id);
-        //dd($imagen);
         return $imagen;
     }
 
@@ -103,5 +101,18 @@ class ImageController extends Controller
         $imagen->delete();
 
         return redirect(route('dashboard.image.all'))->with('success', 'Se ha eliminado correctamente la imágen.');
+    }
+
+    /**
+     * Retorna las imágnes (sin los datos de imagen) ante una consulta ajax.
+     */
+    public function ajaxImagenes(Request $request){
+        if($request->ajax()){
+            $imagenes = Image::all('id','nombre_vista','juego_id');
+            return \Response::json($imagenes);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
     }
 }

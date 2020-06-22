@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('base');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -27,14 +27,17 @@ Route::get('/profile/contraseña', 'PasswordModifyController@index')->name('modi
 Route::post('/profile/contraseña', 'PasswordModifyController@store')->name('modify_passw');
 
 Route::get('/dashboard', 'AdminController@index')->middleware('is_admin')->name('dashboard');
-Route::get('/dashboard/games/all', 'GameController@index')->middleware('is_admin')->name('dashboard.game.all');
-Route::get('/dashboard/games/edit/{id}', 'GameController@updateIndex')->middleware('is_admin')->name('dashboard.game.edit');
-Route::post('/dashboard/games/edit/{id}', 'GameController@update')->middleware('is_admin')->name('dashboard.game.edit');
-Route::delete('/dashboard/games/delete/{id}', 'GameController@destroy')->middleware('is_admin')->name('dashboard.game.delete');
-Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('is_admin')->name('dashboard.game.new');
-Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('is_admin')->name('dashboard.game.new');
+Route::get('/dashboard/games/allAjax', 'GameController@ajaxJuegos')->middleware('auth')->middleware('is_admin')->name('dashboard.game.all.ajax');
+Route::get('/dashboard/games/getAjax/{id}', 'GameController@ajaxJuego')->middleware('auth')->middleware('is_admin')->name('dashboard.game.ajax');
+Route::get('/dashboard/games/all', 'GameController@index')->middleware('auth')->middleware('is_admin')->name('dashboard.game.all');
+Route::get('/dashboard/games/edit/{id}', 'GameController@updateIndex')->middleware('auth')->middleware('is_admin')->name('dashboard.game.edit');
+Route::post('/dashboard/games/edit/{id}', 'GameController@update')->middleware('auth')->middleware('is_admin')->name('dashboard.game.edit');
+Route::delete('/dashboard/games/delete/{id}', 'GameController@destroy')->middleware('auth')->middleware('is_admin')->name('dashboard.game.delete');
+Route::get('/dashboard/games/new', 'GameController@newGame')->middleware('auth')->middleware('is_admin')->name('dashboard.game.new');
+Route::post('/dashboard/games/new', 'GameController@newGameCreate')->middleware('auth')->middleware('is_admin')->name('dashboard.game.new');
 
 Route::get('/dashboard/images/all', 'ImageController@index')->middleware('is_admin')->name('dashboard.image.all');
+Route::get('/dashboard/images/allAjax', 'ImageController@ajaxImagenes')->middleware('is_admin')->name('dashboard.image.all.ajax');
 Route::get('/dashboard/images/ver/{id}', 'ImageController@verImagen')->middleware('is_admin')->name('dashboard.image.ver');
 Route::delete('/dashboard/images/delete/{id}', 'ImageController@destroy')->middleware('is_admin')->name('dashboard.image.delete');
 Route::get('/dashboard/images/new', 'ImageController@newImage')->middleware('is_admin')->name('dashboard.image.new');
@@ -47,14 +50,21 @@ Route::post('/decoradores/genero', 'DecoradorController@createGenero')->middlewa
 Route::post('/decoradores/plataforma', 'DecoradorController@createPlataforma')->middleware('is_admin')->name('dashboard.decoradores.plataforma');
 Route::post('/decoradores/editor', 'DecoradorController@createEditor')->middleware('is_admin')->name('dashboard.decoradores.editor');
 Route::post('/decoradores/desarrollador', 'DecoradorController@createDesarrollador')->middleware('is_admin')->name('dashboard.decoradores.desarrollador');
+Route::get('/decoradores/genero', 'DecoradorController@ajaxGenero')->middleware('is_admin')->name('dashboard.decoradores.genero.ajax');
+Route::get('/decoradores/plataforma', 'DecoradorController@ajaxPlataforma')->middleware('is_admin')->name('dashboard.decoradores.plataforma.ajax');
+Route::get('/decoradores/editor', 'DecoradorController@ajaxEditor')->middleware('is_admin')->name('dashboard.decoradores.editor.ajax');
+Route::get('/decoradores/desarrollador', 'DecoradorController@ajaxDesarrollador')->middleware('is_admin')->name('dashboard.decoradores.desarrollador.ajax');
 
 Route::get('/dashboard/usuarios', 'AdminController@allUsers')->middleware('is_admin')->name('dashboard.usuarios');
+Route::get('/dashboard/usuarios/allAjax', 'AdminController@ajaxUsers')->middleware('is_admin')->name('dashboard.usuarios.ajax');
 Route::post('/dashboard/usuarios/adminificar/{id}', 'AdminController@adminificar')->middleware('is_admin')->name('dashboard.usuarios.adminificar');
 
 Route::get('/dashboard/calificaciones/all', 'CalificacionController@index')->middleware('is_admin')->name('dashboard.calificacion.all');
+Route::get('/dashboard/calificaciones/allAjax', 'CalificacionController@ajaxCalificaciones')->middleware('is_admin')->name('dashboard.calificacion.all.ajax');
 
 Route::get('/games', 'GameController@main')->name('games'); //pantalla principal de todos los juegos
-Route::get('/games/{id}', 'GameController@juego')->name('game'); //pantalla principal de un juego
+Route::get('/games/detalles/{id}', 'GameController@juegoDetalles')->name('game.detalles'); //pantalla principal de un juego
+Route::get('/games/review/{id}', 'GameController@juegoReview')->name('game.review'); //pantalla principal de un juego
 
 //Verificación de mail de usuario
 Route::get('/verify', function () {

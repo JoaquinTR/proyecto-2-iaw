@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-    //indico como construir la tabla en base a los juegos recibidos
     $('#dt-calificacion').DataTable({
         paging: true,
         autoWidth: false,
@@ -9,7 +8,26 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: calificaciones,
+        ajax: {
+            url: url,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
+        initComplete: function(settings, json) {
+            /**
+             * Funcionalidad de los links, para evitar tener un contenido enorme en la tabla.
+             */
+            $('.stretched-link').on('click',function(event){
+                let celda = event.currentTarget.parentElement.parentElement; //celda de la datatable
+                let contenido = $('#dt-calificacion').dataTable().api().cell(celda).data();    //datos de la celda
+
+                $('#modal-info-content').html(contenido);
+                $('#modal-info').modal("show");
+            });
+        },
         columns: [
         {
             data: 'id',
@@ -88,14 +106,4 @@ $(document).ready(function() {
         ]
     });
 
-    /**
-     * Funcionalidad de los links, para evitar tener un contenido enorme en la tabla.
-     */
-    $('.stretched-link').on('click',function(event){
-        let celda = event.currentTarget.parentElement.parentElement; //celda de la datatable
-        let contenido = $('#dt-calificacion').dataTable().api().cell(celda).data();    //datos de la celda
-
-        $('#modal-info-content').html(contenido);
-        $('#modal-info').modal("show");
-    });
 });

@@ -1,11 +1,7 @@
 @extends('dashboard')
 
 @section('css')
-<style>
-    #imagen{
-        max-width: 100%;
-    }
-</style>
+<link rel="stylesheet" href="{{ asset('css/allImages/allImages.css') }}">
 @endsection
 
 @section('seleccion-perfil')
@@ -72,7 +68,7 @@
 @section('scripts')
 <script type="text/javascript" src="{{ asset('datatables/datatables.min.js') }}"></script>
 <script type="text/javascript">
-    var images = {!! json_encode($images); !!}; //paso los datos parseados como json
+    var url = '{!! route('dashboard.image.all.ajax') !!}';
     var urlVer = '{!! route('dashboard.image.ver',":id") !!}';
 
     //la siguiente plantilla la utilizo como acciones dentro de la datatable

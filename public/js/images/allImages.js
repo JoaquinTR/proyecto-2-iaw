@@ -9,7 +9,42 @@ $(document).ready(function() {
         deferRender: true,
         orderClasses: false,
         scrollCollapse: true,
-        data: images,
+        ajax: {
+            url: url,
+            method: "GET",
+            dataSrc: "",
+            xhrFields: {
+                withCredentials: true
+            }
+        },
+        initComplete: function(settings, json) {
+            /**
+             * Funcionalidad de los links, para evitar traer todas las imágenes.
+             */
+            $('.stretched-link').on('click', function(e){
+                e.preventDefault();
+
+                var $this = $(this);
+                console.log($this.attr('href'));
+
+                $.ajax({
+                    url: $this.attr('href'),
+                    type: 'GET',
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result){
+                        let img = "data:image/png;base64, "+result.imagen;
+                        $('#imagen').attr("src",img);
+                        $('#modal-img').modal("show");
+                    },
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("ocurrió un error: "+errorThrown);
+                    }
+                });
+            });
+        },
         columns: [
         {
             data: 'id',
@@ -53,30 +88,6 @@ $(document).ready(function() {
         }
 
         ]
-    });
-
-    $('.stretched-link').on('click', function(e){
-        e.preventDefault();
-
-        var $this = $(this);
-        console.log($this.attr('href'));
-
-        $.ajax({
-            url: $this.attr('href'),
-            type: 'GET',
-            cache: false,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function(result){
-                let img = "data:image/png;base64, "+result.imagen;
-                $('#imagen').attr("src",img);
-                $('#modal-img').modal("show");
-            },
-            //If there was no resonse from the server
-            error: function(jqXHR, textStatus, errorThrown){
-                alert("ocurrió un error: "+errorThrown);
-            }
-        });
     });
 
     $('#modal-img').on('hidden.bs.modal', function () {

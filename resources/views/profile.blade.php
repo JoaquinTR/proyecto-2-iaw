@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="ml-5 d-flex flex-row">
+    <div class="ml-5 mt-3 d-flex flex-row">
         <div class="justify-content-left">
             <div class="card">
                 <div class="card-header">

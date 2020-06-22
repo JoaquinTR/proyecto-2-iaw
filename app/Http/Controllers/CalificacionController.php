@@ -13,7 +13,19 @@ class CalificacionController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $calificaciones = Calificacion::all('id','users_id','juego_id','reseña','descripcion','puntaje','tipo','updated_at');
-        return view('dashboard.allCalificaciones',compact('calificaciones'));
+        return view('dashboard.allCalificaciones');
+    }
+
+    /**
+     * Retorna las calificaciones ante una consulta ajax.
+     */
+    public function ajaxCalificaciones(Request $request){
+        if($request->ajax()){
+            $calificaciones = Calificacion::all('id','users_id','juego_id','reseña','descripcion','puntaje','tipo','updated_at');
+            return \Response::json($calificaciones);
+        }
+        else{
+            return back()->with('error', 'Accesso denegado.');
+        }
     }
 }

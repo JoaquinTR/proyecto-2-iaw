@@ -1,47 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<style>
-    .d-flex.container {
-        background: black;
-    }
-
-    img {
-        max-height: 570px;
-        max-width: 570px;
-        border-radius: 10%;
-        margin:0 auto;
-    }
-
-    .top-comentarios{
-        border: none!important;
-    }
-
-    .top-rating{
-        border: none!important;
-    }
-    a{
-        height: 100%;
-        text-decoration: none !important;
-    }
-    .l-space{
-        letter-spacing: 3px;
-    }
-    a.list-group-item.bg-light.text-dark{
-        border: none!important;
-    }
-    .list-group{
-        border-radius: 0;
-    }
-    ol.carousel-indicators li.active{
-        transform: scale(1.30);
-        background-color:black;
-        border: 1px solid white;
-    }
-    .bg-gray{
-        background-color: gray;
-    }
- </style>
+<link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
 @endsection
 
 @section('body')

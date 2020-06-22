@@ -16,7 +16,7 @@
 
                     @include('components.flash-message')
 
-                    <form id="form-edit" method="POST" action="{{ url('/dashboard/games/edit',$juego->id) }}">
+                    <form id="form-edit" method="POST" action="{{ url('/dashboard/games/edit',$id) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -117,8 +117,7 @@
 <script src="{{ asset('js/select2.min.js') }}" defer></script>
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}" defer></script>
 <script type="text/javascript">
-    var juego = {!! json_encode($juego); !!}; //paso los datos del juego al js
+    var url = '{!! route('dashboard.game.ajax',$id) !!}'
 </script>
-{{-- es el mismo frontend que newGame, esto solo setea select2 y datepicker --}}
 <script src="{{ asset('js/editGame/editGame.js') }}" defer></script>
 @endsection
