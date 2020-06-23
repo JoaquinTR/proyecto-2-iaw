@@ -10,9 +10,6 @@
     <link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon"/>
     <title>Gaming Place</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -43,11 +40,14 @@
             <span class="game-font">© Game Place</span>
         </div>
         <div class="flex-center" style="padding: 10px;">
-            <a class="btn btn-primary" href="{{ route('home') }}">
+            <a id="back" class="btn btn-primary">
                 ¿Volvemos?
             </a>
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/404.js') }}" defer></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ use App\Editor;
 use App\Desarrollador;
 use App\Juego;
 use App\Image;
+use App\Calificacion;
 
 class GameController extends Controller
 {
@@ -52,8 +53,8 @@ class GameController extends Controller
         $juego = Juego::findOrFail($id);
         $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
         $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
-
-        return view('games.gameDetails',compact('juego','imagen_principal','imagen_fondo'));
+        $tab = 0;
+        return view('games.gameDetails',compact('juego','imagen_principal','imagen_fondo','tab'));
     }
 
     /**
@@ -62,12 +63,51 @@ class GameController extends Controller
      * @param $id El id del juego en cuestión.
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function juegoReview(Request $request, $id){
+    public function juegoReview(Request $request, $id, $filtro = 'recientes'){
+        //filtro in ['recientes','viejos','calif_alta','calif_baja']
         $juego = Juego::findOrFail($id);
+        $id_user = auth()->user()->id;
         $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
         $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
-        /* dd($imagen_fondo); */
-        return view('games.gameReviews',compact('juego','imagen_principal','imagen_fondo'));
+        $tab=1;
+
+        $calificaciones = array();
+        $total = 0;
+        //calificaciones
+        foreach(range(10,1) as $p){
+            $calificaciones[$p] = count(Calificacion::where('puntaje',$p)->where('juego_id',$juego->id)->get());
+            $total += $calificaciones[$p];
+        }
+
+        $mis_calificaciones = Calificacion::where('juego_id',$juego->id)->where('users_id',$id_user)->orderBy('created_at','DESC')->get();
+
+        $calif_users = Calificacion::where('juego_id',$juego->id)->where('users_id', '!=' ,$id_user);
+
+        switch($filtro){
+            case 'recientes':
+                $calif_users = $calif_users->orderBy('created_at','DESC');
+            break;
+
+            case 'viejos':
+                $calif_users = $calif_users->orderBy('created_at','ASC');
+            break;
+
+            case 'calif_alta':
+                $calif_users = $calif_users->orderBy('puntaje','DESC');
+            break;
+
+            case 'calif_baja':
+                $calif_users = $calif_users->orderBy('puntaje','ASC');
+            break;
+
+            default:
+                return abort(404); //la ruta no está contemplada en la agregación.
+            break;
+        }
+
+        $calif_users = $calif_users->Paginate(12);
+
+        return view('games.gameReviews',compact('juego','imagen_principal','imagen_fondo','tab','calificaciones','total','mis_calificaciones','calif_users','filtro'));
     }
 
     /**
@@ -184,11 +224,9 @@ class GameController extends Controller
 
         $juego = Juego::find($id);
         $input = $request->all();
-        //$juego=array();
 
         $juego->nombre = $input["nombre"];
         $juego->descripcion = $input["desc"];
-        //$juego->imagen = $input["imagen"];
         $juego->fecha_lanzamiento = $input["date"];
         $juego->genero = json_encode($input["generos_id"], JSON_UNESCAPED_UNICODE );
         $juego->plataforma = json_encode($input["plataformas_id"], JSON_UNESCAPED_UNICODE );
@@ -197,7 +235,6 @@ class GameController extends Controller
         $juego->updated_at = now();
 
         $juego->save();
-        //Juego::whereId($id)->update($juego);
 
         return redirect('/dashboard/games/all')->with('success', 'Se ha actualizado correctamente el juego.');
     }

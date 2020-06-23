@@ -25,7 +25,7 @@ class Calificacion extends Model
     /**
      * Obtener el usuario que creó esta calificacion.
      */
-    public function user()
+    public function users()
     {
         return $this->belongsTo('App\User');
     }

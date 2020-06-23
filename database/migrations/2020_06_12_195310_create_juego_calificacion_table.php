@@ -34,7 +34,7 @@ class CreateJuegoCalificacionTable extends Migration
             $table->unsignedBigInteger('juego_id');
             $table->longText('reseña');
             $table->longText('descripcion');
-            $table->string('puntaje');
+            $table->unsignedBigInteger('puntaje');
             $table->string('tipo');
             $table->timestamps();
         });

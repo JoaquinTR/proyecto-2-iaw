@@ -31,7 +31,7 @@ $factory->define(App\Calificacion::class, function (Faker $faker) {
         'descripcion' => '',
         'reseña' => $mensaje,
         'puntaje' => $puntaje,
-        'tipo' => 'Jugador',
+        'tipo' => 'jugador',
         'created_at' => now(),
         'updated_at' => now()
     ];

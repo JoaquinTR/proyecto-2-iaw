@@ -38,11 +38,11 @@
 
             <div class="w-100">
                 <ul class="nav nav-tabs pl-5 border-bottom border-dark">
-                    <li class="nav-item bg-light border-top border-dark border-2 active border-left border-right">
-                      <a class="nav-link active" href="{{ route('game.detalles',$juego->id) }}">Detalles</a>
+                    <li class="nav-item bg-light border-top border-dark border-2 border-left border-right {{ $tab==0 ? 'active' : '' }}">
+                      <a id="tab-detalles" class="nav-link {{ $tab==0 ? 'active' : '' }}" href="{{ route('game.detalles',$juego->id) }}">Detalles</a>
                     </li>
-                    <li class="nav-item bg-light border-top border-dark border-2 border-right">
-                      <a class="nav-link" href="{{ route('game.review',$juego->id) }}">Calificaciones</a>
+                    <li class="nav-item bg-light border-top border-dark border-2 border-right {{ $tab==1 ? 'active' : '' }}">
+                      <a id="tab-calificaciones" class="nav-link {{ $tab==1 ? 'active' : '' }}" href="{{ route('game.review',$juego->id) }}">Calificaciones</a>
                   </ul>
             </div>
 

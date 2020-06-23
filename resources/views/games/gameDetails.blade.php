@@ -1,20 +1,26 @@
 @extends('games.game')
 
 @section('css-game')
-    <style>
-        .heading{
-            border-left: 4px solid var(--primary);
-        }
-        .list-group-item{
-            background-color: transparent !important;
-        }
-        .badge h5{
-            margin: 0 !important;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/gameDetails/gameDetails.css') }}">
 @endsection
 
 @section('seleccion')
+
+<div id="modal-img" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light">Contenido</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     </div>
+    <div class="modal-body imagen justify-content-center">
+        <img id="imagen" src="" alt="Imagen seleccionada" />
+    </div>
+    <div class="modal-footer justify-content-center bg-dark">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+    </div>
+</div>
+
 <div class="container">
     <div class="d-flex flex-row justify-content-start w-100 heading my-3">
         <h1 class="pl-3">Detalles</h1>
@@ -56,4 +62,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts-game')
+<script src="{{ asset('js/gameDetails/gameDetails.js') }}"></script>
 @endsection

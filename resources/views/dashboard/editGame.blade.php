@@ -16,7 +16,7 @@
 
                     @include('components.flash-message')
 
-                    <form id="form-edit" method="POST" action="{{ url('/dashboard/games/edit',$id) }}">
+                    <form id="form-edit" method="POST" action="{{ route('dashboard.game.edit',$id) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -32,14 +32,6 @@
                             <input type="text" name="desc" class="form-control" placeholder="">
                             @if ($errors->has('desc'))
                                 <span class="text-danger">{{ $errors->first('desc') }}</span>
-                            @endif
-                        </div>
-
-                        <div class="form-group">
-                            <label>Id del repositorio de imágenes:</label>
-                            <input type="text" name="imagen" class="form-control" placeholder="">
-                            @if ($errors->has('imagen'))
-                                <span class="text-danger">{{ $errors->first('imagen') }}</span>
                             @endif
                         </div>
 
