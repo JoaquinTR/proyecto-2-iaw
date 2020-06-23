@@ -118,6 +118,7 @@
         </div>
     </div>
 
+    @auth   {{-- solo si está logeado --}}
     <div class="mx-3 mt-5">
         <div class="d-flex flex-row justify-content-start w-100 heading mt-3">
             <h1 class="pl-1">Mis calificaciones de este juego</h1>
@@ -139,7 +140,7 @@
             <div>
         </div>
     </div>
-
+    @endauth
 
     <div class="mx-3 mt-5">
         <div class="d-flex flex-row justify-content-start w-100 heading mt-3">

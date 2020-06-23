@@ -48,9 +48,6 @@
                             <a class="nav-link" href="{{ route('games') }}">Juegos</a>
                         </li>
                     </ul>
-                    <form class="form-inline m-2 w-50">
-                        <input class="form-control w-100" type="search" placeholder="Buscar" aria-label="Search">
-                      </form>
 
 
                     <!-- Right Side Of Navbar -->

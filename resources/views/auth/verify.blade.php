@@ -1,7 +1,7 @@
 @extends('profile')
 
 @section('seleccion-perfil')
-<div class="container">
+<div class="container my-5">
     <div class="row">
         <div class="col-md-8">
             <div class="card">

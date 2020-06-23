@@ -4,16 +4,20 @@ $(document).ready(function () {
         initInputs(juego);
     })
     $('#generos').select2({
-        tags:true
+        tags:true,
+        width: '100%'
     });
     $('#plataformas').select2({
-        tags:true
+        tags:true,
+        width: '100%'
     });
     $('#editores').select2({
-        tags:true
+        tags:true,
+        width: '100%'
     });
     $('#desarrolladores').select2({
-        tags:true
+        tags:true,
+        width: '100%'
     });
     $("#datep").datepicker({
         format: 'yyyy/mm/dd',

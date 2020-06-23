@@ -64,9 +64,10 @@ Route::post('/calificación/new/{id}','CalificacionController@newCalificacion')-
 Route::get('/dashboard/calificaciones/allAjax', 'CalificacionController@ajaxCalificaciones')->middleware('is_admin')->name('dashboard.calificacion.all.ajax');
 
 Route::get('/games', 'GameController@main')->name('games'); //pantalla principal de todos los juegos
-Route::get('/games/{id}', 'GameController@juegoDetalles')->name('game'); //pantalla principal de un juego
-Route::get('/games/detalles/{id}', 'GameController@juegoDetalles')->name('game.detalles'); //pantalla principal de un juego
-Route::get('/games/review/{id}/{filtro?}', 'GameController@juegoReview')->name('game.review'); //pantalla principal de un juego
+Route::post('/games', 'GameController@busquedaJuego')->name('games'); //pantalla principal de todos los juegos, filtros aplicados
+Route::get('/games/{id}', 'GameController@juegoDetalles')->name('game'); //pantalla principal de un juego particular
+Route::get('/games/detalles/{id}', 'GameController@juegoDetalles')->name('game.detalles'); //pantalla principal de un juego particular, url alternativa
+Route::get('/games/review/{id}/{filtro?}', 'GameController@juegoReview')->name('game.review'); //pantalla de reseñas de un juego
 
 //Verificación de mail de usuario
 Route::get('/verify', function () {

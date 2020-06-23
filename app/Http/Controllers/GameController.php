@@ -39,7 +39,13 @@ class GameController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function main(){
-        return view('games');
+        $generos = Genero::all();
+        $plataformas = Plataforma::all();
+        $editores = Editor::all();
+        $desarrolladores = Desarrollador::all();
+
+        $juegos = Juego::orderBy('fecha_lanzamiento', 'DESC')->Paginate(12);
+        return view('games',compact('generos','plataformas','editores','desarrolladores','juegos'));
     }
 
     /**
@@ -66,7 +72,8 @@ class GameController extends Controller
     public function juegoReview(Request $request, $id, $filtro = 'recientes'){
         //filtro in ['recientes','viejos','calif_alta','calif_baja']
         $juego = Juego::findOrFail($id);
-        $id_user = auth()->user()->id;
+        $id_user = null;
+        if(auth()->user()) $id_user = auth()->user()->id;
         $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
         $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
         $tab=1;
@@ -79,9 +86,15 @@ class GameController extends Controller
             $total += $calificaciones[$p];
         }
 
-        $mis_calificaciones = Calificacion::where('juego_id',$juego->id)->where('users_id',$id_user)->orderBy('created_at','DESC')->get();
+        $mis_calificaciones = '';
+        if($id_user){
+            $mis_calificaciones = Calificacion::where('juego_id',$juego->id)->where('users_id',$id_user)->orderBy('created_at','DESC')->get();
 
-        $calif_users = Calificacion::where('juego_id',$juego->id)->where('users_id', '!=' ,$id_user);
+            $calif_users = Calificacion::where('juego_id',$juego->id)->where('users_id', '!=' ,$id_user);
+        }else{
+            $calif_users = Calificacion::where('juego_id',$juego->id);
+        }
+
 
         switch($filtro){
             case 'recientes':
@@ -277,5 +290,126 @@ class GameController extends Controller
         else{
             return back()->with('error', 'Accesso denegado.');
         }
+    }
+
+    /**
+     * Aplica los filtros de búsqueda en base a los siguientes valores ante un post, teniendo en cuenta que
+     * los nombres de parámetros son case sensitive:
+     *  - nombre: String.
+     *  - genero_id: Lista formato json.
+     *  - plataforma_id: Lista formato json.
+     *  - editor_id: Lista formato json.
+     *  - desarrollador_id: Lista formato json.
+     *  - date: Mas nuevos que esta fecha de lanzamiento.
+     *  - date-hasta: mas viejos que esta fecha de lanzamiento (combinado con date aplica un filtro entre ambas fechas).
+     *  - orden: ('ASC' | 'DESC') ordena de manera ascendiente o descendiente en base a la fecha de lanzamiento.
+     */
+    public function busquedaJuego(Request $request){
+
+        //datos para regenerar los filtros
+        $generos = Genero::all();
+        $plataformas = Plataforma::all();
+        $editores = Editor::all();
+        $desarrolladores = Desarrollador::all();
+
+        //obtención de input, dinámicamente dentro de un string construyo lo que va luego de 'Juego::'
+        //para luego aplicarlo al final.
+        $input = $request->all();
+
+        $juegos = null;
+        $first=0;
+        if(array_key_exists("nombre",$input) && $input["nombre"]){
+            if($first == 0){
+                $first =1;          //marco el inicio de las consultas y no agrego nada.
+                $juegos = Juego::where("nombre","ilike", "%" . $input["nombre"] . "%");
+            }else{
+                $juegos = $juegos->where("nombre","ilike", "%" . $input["nombre"] . "%");   //encadeno otra llamada.
+            }
+        }
+        if(array_key_exists("generos_id",$input) && $input["generos_id"]){
+            $cant = count($input["generos_id"]);
+            if($first == 0){
+                $juegos = Juego::where("genero",'ilike', "%" . $input["generos_id"][0] . "%");
+                for($i = 1; $i<$cant; $i++){
+                    $juegos = $juegos->where("genero",'ilike', "%" . $input["generos_id"][$i] . "%");
+                }
+                $first =1;
+            }else{
+                for($i = 0; $i<$cant; $i++){
+                    $juegos = $juegos->where("genero",'ilike', "%" . $input["generos_id"][$i] . "%");
+                }
+            }
+        }
+        if(array_key_exists("plataformas_id",$input) && $input["plataformas_id"]){
+            $cant = count($input["plataformas_id"]);
+            if($first == 0){
+                $juegos = Juego::where("plataforma",'ilike', "%" . $input["plataformas_id"][0] . "%");
+                for($i = 1; $i<$cant; $i++){
+                    $juegos = $juegos->where("plataforma",'ilike', "%" . $input["plataformas_id"][$i] . "%");
+                }
+                $first =1;
+            }else{
+                for($i = 0; $i<$cant; $i++){
+                    $juegos = $juegos->where("plataforma",'ilike', "%" . $input["plataformas_id"][$i] . "%");
+                }
+            }
+        }
+        if(array_key_exists("editores_id",$input) && $input["editores_id"]){
+            $cant = count($input["editores_id"]);
+            if($first == 0){
+                $juegos = Juego::where("editor",'ilike', "%" . $input["editores_id"][0] . "%");
+                for($i = 1; $i<$cant; $i++){
+                    $juegos = $juegos->where("editor",'ilike', "%" . $input["editores_id"][$i] . "%");
+                }
+                $first =1;
+            }else{
+                for($i = 0; $i<$cant; $i++){
+                    $juegos = $juegos->where("editor",'ilike', "%" . $input["editores_id"][$i] . "%");
+                }
+            }
+        }
+        if(array_key_exists("desarrolladores_id",$input) && $input["desarrolladores_id"]){
+            $cant = count($input["desarrolladores_id"]);
+            if($first == 0){
+                $juegos = Juego::where("desarrollador",'ilike', "%" . $input["desarrolladores_id"][0] . "%");
+                for($i = 1; $i<$cant; $i++){
+                    $juegos = $juegos->where("desarrollador",'ilike', "%" . $input["desarrolladores_id"][$i] . "%");
+                }
+                $first =1;
+            }else{
+                for($i = 0; $i<$cant; $i++){
+                    $juegos = $juegos->where("desarrollador",'ilike', "%" . $input["desarrolladores_id"][$i] . "%");
+                }
+            }
+        }
+        if(array_key_exists("date",$input) && $input["date"]){
+            if($first == 0){
+                if(array_key_exists("date-hasta",$input) && $input["date-hasta"]){
+                    $juegos = Juego::whereBetween("fecha_lanzamiento", [$input["date"],$input["date-hasta"]]);
+                }else{
+                    $juegos = Juego::whereDate("fecha_lanzamiento", '>=', $input["date"]);
+                }
+                $first =1;
+            }else{
+                if(array_key_exists("date-hasta",$input) && $input["date-hasta"]){
+                    $juegos = $juegos->whereBetween("fecha_lanzamiento", [$input["date"],$input["date-hasta"]]);
+                }else{
+                    $juegos = $juegos->whereDate("fecha_lanzamiento", '>=', $input["date"]);
+                }
+            }
+        }
+        if(array_key_exists("orden",$input) && $input["orden"]){
+            if($first == 0){
+                $juegos = Juego::orderBy("fecha_lanzamiento", $input["orden"]);
+                $first =1;
+            }else{
+                $juegos = $juegos->orderBy("fecha_lanzamiento", $input["orden"]);
+            }
+        }
+
+        $juegos = $juegos->Paginate(12);
+
+        return view('games',compact('generos','plataformas','editores','desarrolladores','juegos'));
+
     }
 }
