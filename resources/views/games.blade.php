@@ -20,10 +20,12 @@
     </div>
 </div>
 <div class="container">
+
     @include('components.flash-message')
+
     <form action="{{ route('games') }}" method="post">
         {{ csrf_field() }}
-
+        @if(empty($filtrado) || !$filtrado)
         <div class="form-group d-flex">
             <div class="w-50 h-100 mr-3">
                 <label>Nombre:</label>
@@ -107,10 +109,15 @@
                     <span class="text-danger">{{ $errors->first('date-hasta') }}</span>
                 @endif
         </div>
-
+        @endif
         <div class="form-group text-center">
+            @if(empty($filtrado) || !$filtrado)
             <button class="btn btn-success btn-submit w-25" type="submit">Filtrar</button>
-            <a class="btn btn-secondary w-25" href="{{ route('games') }}">Resetear</a>
+            <a class="btn btn-secondary w-25" href="{{ route('games') }}">Resetear filtros</a>
+            @else
+            <a class="btn btn-success w-25" href="{{ route('games') }}">Resetear filtros</a>
+            @endif
+
         </div>
     </form>
 </div>
@@ -118,9 +125,13 @@
 {{-- Resultados --}}
 <div class="container">
     <div class="d-flex flex-row justify-content-start w-100 heading mt-3">
+        @if(empty($filtrado) || !$filtrado)
         <h1 class="pl-1">Juegos</h1>
+        @else
+        <h1 class="pl-1">Resultados</h1>
+        @endif
     </div>
-    <div class="card my-3 border-secondary">
+    <div class="card my-3 border-secondary bg-secondary">
         <div class="card-body p-2">
             @if(!empty($juegos) && $juegos->count())
                 <div class="card-columns">
@@ -129,7 +140,7 @@
                         <div class="card" href="{{ route('game',$juego->id) }}">
                             <img
                             class="card-img-top"
-                            src="data:image/png;base64, {{ $juego->imagenes[array_search('principal', array_column($juego->imagenes->toArray(), 'nombre_vista'))]->imagen }}"
+                            src=" {{ ($juego->imagenes->count()) ? "data:image/png;base64,".$juego->imagenes[array_search('principal', array_column($juego->imagenes->toArray(), 'nombre_vista'))]->imagen : asset("images/principal.jpg") }}"
                             alt="Card image cap"
                             >
                             <div class="card-body">

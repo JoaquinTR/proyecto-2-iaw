@@ -123,21 +123,25 @@
         <div class="d-flex flex-row justify-content-start w-100 heading mt-3">
             <h1 class="pl-1">Mis calificaciones de este juego</h1>
         </div>
-        <div class="my-3">
-            <div class="card-columns">
-                @foreach ($mis_calificaciones as $idx => $calificacion)
-                    <div class="card">
-                        <div class="card-header p-2">
-                            <h5 class="card-title text-center mb-1">{{ $calificacion->descripcion }}</h5>
+        <div class="my-3 bg-secondary card">
+            @if(!empty($mis_calificaciones) && $mis_calificaciones->count())
+                <div class="card-columns bg-secondary p-3">
+                    @foreach ($mis_calificaciones as $idx => $calificacion)
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <h5 class="card-title text-center mb-1">{{ $calificacion->descripcion }}</h5>
+                            </div>
+                            <h4 class="card-title bg-dark text-center game-font text-light">{{ $calificacion->puntaje }}</h4>
+                            <div class="card-body">
+                                <p class="card-text">{{ $calificacion->reseña }}</p>
+                                <p class="card-text text-right"><small class="text-muted">{{ $calificacion->created_at }}</small></p>
+                            </div>
                         </div>
-                        <h4 class="card-title bg-dark text-center game-font text-light">{{ $calificacion->puntaje }}</h4>
-                        <div class="card-body">
-                            <p class="card-text">{{ $calificacion->reseña }}</p>
-                            <p class="card-text text-right"><small class="text-muted">{{ $calificacion->created_at }}</small></p>
-                        </div>
-                    </div>
-                @endforeach
-            <div>
+                    @endforeach
+                </div>
+            @else
+                <h1 class="w-100 text-center text-light"> Aún no comentaste este juego.</h1>
+            @endif
         </div>
     </div>
     @endauth
@@ -163,9 +167,9 @@
                   </li>
                 </ul>
             </div>
-            <div class="card-body p-2">
+            <div class="card-body p-2 bg-secondary">
                 @if(!empty($calif_users) && $calif_users->count())
-                    <div class="card-columns">
+                    <div class="card-columns bg-secondary">
 
                         @foreach ($calif_users as $idx => $calificacion)
                             <div class="card">
@@ -184,7 +188,7 @@
                         @endforeach
                     </div>
                 @else
-                    <h1 class="w-100 text-center"> No hay comentarios aún</h1>
+                    <h1 class="w-100 text-center text-light"> No hay comentarios aún</h1>
                 @endif
 
                 @if(!empty($calif_users) && $calif_users->count())

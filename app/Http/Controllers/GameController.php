@@ -57,8 +57,19 @@ class GameController extends Controller
     public function juegoDetalles(Request $request, $id){
 
         $juego = Juego::findOrFail($id);
-        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
-        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
+        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get();
+
+        if(count($imagen_principal))
+            $imagen_principal = $imagen_principal[0]->imagen;
+        else
+            $imagen_principal = 0;
+
+        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get();
+        if(count($imagen_fondo))
+            $imagen_fondo = $imagen_fondo[0]->imagen;
+        else
+            $imagen_fondo = 0;
+
         $tab = 0;
         return view('games.gameDetails',compact('juego','imagen_principal','imagen_fondo','tab'));
     }
@@ -74,8 +85,20 @@ class GameController extends Controller
         $juego = Juego::findOrFail($id);
         $id_user = null;
         if(auth()->user()) $id_user = auth()->user()->id;
-        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get()[0]->imagen;
-        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get()[0]->imagen;
+        $imagen_principal = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','principal')->get();
+        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get();
+
+        if(count($imagen_principal))
+            $imagen_principal = $imagen_principal[0]->imagen;
+        else
+            $imagen_principal = 0;
+
+        $imagen_fondo = $juego->imagenes()->getQuery()->select('imagen')->where('nombre_vista','fondo')->get();
+        if(count($imagen_fondo))
+            $imagen_fondo = $imagen_fondo[0]->imagen;
+        else
+            $imagen_fondo = 0;
+
         $tab=1;
 
         $calificaciones = array();
@@ -407,9 +430,10 @@ class GameController extends Controller
             }
         }
 
+        $filtrado = 1;
         $juegos = $juegos->Paginate(12);
 
-        return view('games',compact('generos','plataformas','editores','desarrolladores','juegos'));
+        return view('games',compact('generos','plataformas','editores','desarrolladores','juegos','filtrado'));
 
     }
 }

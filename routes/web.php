@@ -19,6 +19,7 @@ Route::get('/', 'HomeController@index')->name('base');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@index')->middleware('is_user')->name('profile');
+Route::get('/profile/token/reset', 'ProfileModifyController@tokenReset')->name('token.reset');
 Route::get('/profile/modify', 'ProfileModifyController@index')->name('modify_data');
 Route::post('/profile/modify/name', 'ProfileModifyController@storeName')->name('modify_data.nombre');
 Route::post('/profile/modify/email', 'ProfileModifyController@storeEmail')->name('modify_data.email');

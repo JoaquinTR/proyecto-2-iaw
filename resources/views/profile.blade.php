@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="ml-5 mt-3 d-flex flex-row">
-        <div class="justify-content-left">
+        <div class="justify-content-left w-20">
             <div class="card">
                 <div class="card-header">
                     Perfil de usuario
@@ -11,22 +11,33 @@
 
                     <div class="p-2 d-flex flex-column">
                         <div class="">
-                            Nombre:
+                            <strong>Nombre:</strong>
                         </div>
                         <div class="text-center">
                             {{ Auth::user()->name }}
                         </div>
                         <div class="">
-                            E-mail:
+                            <strong>E-mail:</strong>
                         </div>
                         <div class="text-center">
                             {{ Auth::user()->email }}
+                        </div>
+                        <div class="">
+                            <strong>api_token:</strong>
+                        </div>
+                        <div class="text-center text-break">
+                            {{ Auth::user()->api_token }}
                         </div>
                     </div>
 
                     <hr/>
 
                     <div class="p-2 d-flex flex-column">
+                        <div class="mb-2">
+                            <a class="btn btn-primary btn-block" href="{{ route('token.reset') }}">
+                                Resetear token
+                            </a>
+                        </div>
                         <div class="mb-2">
                             <a class="btn btn-primary btn-block" href="{{ route('modify_data') }}">
                                 Modificar datos

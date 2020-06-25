@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -58,6 +59,65 @@ class AuthController extends Controller
             return response()->json([
                 'status_code' => 200,
                 'access_token' => $tokenResult,
+                'token_type' => 'Bearer',
+            ]);
+
+        } catch (Exception $error) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Error en el login',
+                'error' => $error,
+            ]);
+        }
+    }
+
+    /**
+     * Regenera un api_token. Por cuestiones de seguridad vuelvo a requerir los datos de login.
+     *
+     */
+    public function reset(Request $request){
+        try {
+
+            $request->validate([
+                'email' => 'email|required',
+                'password' => 'required'
+            ],[
+                'email.email' => 'El email suministrado no respeta la forma de un email.',
+                'email.required' => 'Se necesita un email.',
+                'password.required' => 'Es necesaria la contraseña para autenticarse.'
+            ]);
+
+            $credentials = request(['email', 'password']);
+
+            if (!Auth::attempt($credentials)) {
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'No autorizado'
+                ]);
+            }
+
+            $user = User::where('email', $request->email)->first();
+
+            if ( ! Hash::check($request->password, $user->password, [])) {
+                throw new \Exception('Error en el login');
+            }
+
+            //regenero el token o no.
+            if(request('api_token') == $user->api_token){
+                $user->api_token = Str::random(80);
+                $user->save();
+            }else{
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'No autorizado'
+                ]);
+            }
+
+
+
+            return response()->json([
+                'status_code' => 200,
+                'access_token' => $user->api_token,
                 'token_type' => 'Bearer',
             ]);
 

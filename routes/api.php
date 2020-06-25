@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', 'Auth\AuthController@login');
+Route::post('/token/reset', 'Auth\AuthController@reset');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

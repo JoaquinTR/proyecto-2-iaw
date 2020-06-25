@@ -22,9 +22,9 @@ class CreateJuegoCalificacionTable extends Migration
             $table->longText('plataforma');
             $table->longText('editor');
             $table->longText('desarrollador');
-            $table->unsignedBigInteger('puntaje');
-            $table->unsignedBigInteger('cant_calificaciones');
-            $table->float('rating', 2, 2); //entre 0,00 y 10,00
+            $table->unsignedBigInteger('puntaje')->default(0);
+            $table->unsignedBigInteger('cant_calificaciones')->default(0);
+            $table->float('rating', 2, 2)->default(0); //entre 0,00 y 10,00
             $table->timestamps();
         });
 

@@ -35,6 +35,7 @@
         <nav class="navbar pull-left navbar-expand-md navbar-dark shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand game-font mr-4" href="{{ url('/') }}">
+                    <img src="{{ asset('favicon.png') }}" width="40" height="40" alt="">
                     Gaming Place
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

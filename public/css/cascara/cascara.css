@@ -59,3 +59,7 @@ table.dataTable {
 .zoom:hover {
     transform: scale(1.05);
 }
+
+.w-20{
+    width: 20% !important;
+}
