@@ -73,3 +73,10 @@ Route::get('/games/review/{id}/{filtro?}', 'GameController@juegoReview')->name('
 Route::get('/verify', function () {
     return view('auth.verify');
 })->middleware('is_user')->name('verify');
+Route::middleware('is_admin')->get('/routes',function(Request $request){
+    $routes = [];
+foreach (\Route::getRoutes()->getIterator() as $route){
+        $routes[] = $route->uri;
+}
+    dd($routes);
+});

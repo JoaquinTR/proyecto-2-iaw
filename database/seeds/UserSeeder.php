@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -19,9 +20,21 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('invitado'.$id.'invitado'.$id),
                 'type' => 'default',
                 'created_at' => Carbon\Carbon::now(),
-                'updated_at' => Carbon\Carbon::now()
+                'updated_at' => Carbon\Carbon::now(),
+                'api_token' => Str::random(80),
             ]);
         }
+
+        //usuario especial para testear la api
+        DB::table('users')->insert([
+            'name' => 'api',
+            'email' => 'api@gmail.com',
+            'password' => Hash::make('api'),
+            'type' => 'default',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+            'api_token' => Str::random(80),
+        ]);
 
         //creo un usuario administrador
         DB::table('users')->insert([
@@ -30,16 +43,18 @@ class UserSeeder extends Seeder
             'password' => Hash::make('adminadmin'),
             'type' => 'admin',
             'created_at' => Carbon\Carbon::now(),
-            'updated_at' => Carbon\Carbon::now()
+            'updated_at' => Carbon\Carbon::now(),
+            'api_token' => Str::random(80)
         ]);
 
         DB::table('users')->insert([
-            'name' => 'jefecito',
+            'name' => 'DungeonMaster',
             'email' => 'joaquintricerri@gmail.com',
             'password' => Hash::make('test1test1'),
             'type' => 'admin',
             'created_at' => Carbon\Carbon::now(),
-            'updated_at' => Carbon\Carbon::now()
+            'updated_at' => Carbon\Carbon::now(),
+            'api_token' => Str::random(80)
         ]);
     }
 }

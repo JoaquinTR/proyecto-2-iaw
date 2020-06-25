@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', 'Auth\AuthController@login');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Todos, paginados.
+Route::middleware('auth:api')->post('/juegos/all', 'ApiController@allJuegos');
+Route::middleware('auth:api')->post('/calificaciones/all', 'ApiController@allCalificaciones');
+Route::middleware('auth:api')->post('/generos/all', 'ApiController@allGeneros');
+Route::middleware('auth:api')->post('/plataformas/all', 'ApiController@allPlataformas');
+Route::middleware('auth:api')->post('/editores/all', 'ApiController@allEditores');
+Route::middleware('auth:api')->post('/desarrolladores/all', 'ApiController@allDesarrolladores');
+
+//Consultas filtradas (próximamente).

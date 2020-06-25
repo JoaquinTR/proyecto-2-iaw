@@ -1,7 +1,6 @@
 @extends('dashboard')
 
 @section('seleccion-perfil')
-</style>
 
 <div class="container">
     <div class="row">
