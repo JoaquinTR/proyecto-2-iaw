@@ -37,7 +37,7 @@
         </div>
 
         <div class="flex-center" style="padding: 10px;">
-            <span class="game-font">© Game Place</span>
+            <span class="game-font">© Gaming Place</span>
         </div>
         <div class="flex-center" style="padding: 10px;">
             <a id="back" class="btn btn-primary">
