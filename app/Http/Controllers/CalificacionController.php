@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Calificacion;
+use App\Juego;
 
 class CalificacionController extends Controller
 {
@@ -54,16 +56,32 @@ class CalificacionController extends Controller
 
         $input = $request->all();
 
+
         $c = new Calificacion;
+        DB::beginTransaction();
+        try{
+            $c->puntaje = $input["puntaje"];
+            $c->juego_id = $juego_id;
+            $c->users_id = auth()->user()->id;
+            $c->descripcion = $input["descripcion"];
+            $c->reseña = $input["reseña"];
+            $c->tipo = $input["tipo"];
+            $c->save();
 
-        $c->puntaje = $input["puntaje"];
-        $c->juego_id = $juego_id;
-        $c->users_id = auth()->user()->id;
-        $c->descripcion = $input["descripcion"];
-        $c->reseña = $input["reseña"];
-        $c->tipo = $input["tipo"];
+            $juego = Juego::where('id', $juego_id)->lockForUpdate()->get()[0];
 
-        $c->save();
+            $juego->puntaje = $juego->puntaje + $input["puntaje"];
+            $juego->cant_calificaciones++;
+            $juego->rating = $juego->puntaje / $juego->cant_calificaciones;
+
+            $juego->save();
+        }catch (Throwable $e) {
+            DB::rollBack();
+
+            return back()->with('error', 'Error interno del servidor al intentar crear la calificación.');
+        }
+
+        DB::commit();
 
         return back()->with('success', 'Calificación creada correctamente.');
     }

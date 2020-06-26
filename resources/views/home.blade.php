@@ -26,21 +26,21 @@
         </div>
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            @foreach($recientes as $i => $imagen)
+            @foreach($juegos_nuevos_recientes as $i => $juego)
                 <li data-target="#carousel" data-slide-to="{{ $i }}" class="{{$i == 0 ? 'active' : '' }}"></li>
             @endforeach
           </ol>
         <div class="carousel-inner">
-            @foreach($recientes as $i => $imagen)
+            @foreach($juegos_nuevos_recientes as $i => $juego)
                 <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
 
-                    <a href='{{ route('game',$imagen->juego_id) }}' class="">
-                        <img class="d-block w-50" src="{{ "data:image/png;base64, ".$imagen->imagen }}" alt="First slide">
+                    <a href='{{ route('game',$juego->id) }}' class="">
+                        <img class="d-block w-50" src="{{ ($juego->imagenes->count()) ? "data:image/png;base64, ".$juego->imagenes[array_search('principal', array_column($juego->imagenes->toArray(), 'nombre_vista'))]->imagen : asset('images/principal.jpg') }}" alt="First slide">
                     </a>
 
                     <div class="carousel-caption d-none d-md-block">
                         <div class="bg-dark">
-                            <h5>{{ $imagen->juego->nombre }}</h5>
+                            <h5>{{ $juego->nombre }}</h5>
                         </div>
                     </div>
                 </div>

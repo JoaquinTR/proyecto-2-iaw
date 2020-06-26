@@ -59,15 +59,6 @@
         @foreach ($juego->imagenes as $img)
             <img title="{{ $img->nombre_vista }}" class="img-thumbnail m-3" src="{{ "data:image/png;base64, ".$img->imagen }}" alt="First slide" style="height: 150px;">
         @endforeach
-        @foreach ($juego->imagenes as $img)
-            <img title="{{ $img->nombre_vista }}" class="img-thumbnail m-3" src="{{ "data:image/png;base64, ".$img->imagen }}" alt="First slide" style="height: 150px;">
-        @endforeach
-        @foreach ($juego->imagenes as $img)
-            <img title="{{ $img->nombre_vista }}" class="img-thumbnail m-3" src="{{ "data:image/png;base64, ".$img->imagen }}" alt="First slide" style="height: 150px;">
-        @endforeach
-        @foreach ($juego->imagenes as $img)
-            <img title="{{ $img->nombre_vista }}" class="img-thumbnail m-3" src="{{ "data:image/png;base64, ".$img->imagen }}" alt="First slide" style="height: 150px;">
-        @endforeach
         @if(!$juego->imagenes->count())
             <h1 class="w-100 text-center text-light"> Aún no hay imágenes.</h1>
         @endif
