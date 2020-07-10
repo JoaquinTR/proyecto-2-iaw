@@ -22,11 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Todos, paginados.
-Route::middleware('auth:api')->post('/juegos/all', 'ApiController@allJuegos');
-Route::middleware('auth:api')->post('/calificaciones/all', 'ApiController@allCalificaciones');
-Route::middleware('auth:api')->post('/generos/all', 'ApiController@allGeneros');
-Route::middleware('auth:api')->post('/plataformas/all', 'ApiController@allPlataformas');
-Route::middleware('auth:api')->post('/editores/all', 'ApiController@allEditores');
-Route::middleware('auth:api')->post('/desarrolladores/all', 'ApiController@allDesarrolladores');
+Route::middleware('auth:api')->get('/juegos/all', 'ApiController@allJuegos');
+Route::middleware('auth:api')->get('/calificaciones/all', 'ApiController@allCalificaciones');
+Route::middleware('auth:api')->get('/generos/all', 'ApiController@allGeneros');
+Route::middleware('auth:api')->get('/plataformas/all', 'ApiController@allPlataformas');
+Route::middleware('auth:api')->get('/editores/all', 'ApiController@allEditores');
+Route::middleware('auth:api')->get('/desarrolladores/all', 'ApiController@allDesarrolladores');
 
 //Consultas filtradas (próximamente).
