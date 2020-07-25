@@ -10,6 +10,7 @@ use App\Plataforma;
 use App\Editor;
 use App\Desarrollador;
 use App\Pedido;
+use App\User;
 
 class ApiController extends Controller
 {
@@ -161,6 +162,15 @@ class ApiController extends Controller
             }
 
             $id = $request->users_id;
+            //compruebo que el user indicado sea el dueño del api_token.
+            $api_token = str_replace("Bearer ","",$request->header('Authorization'));
+            $user = User::findOrFail($id);
+            if($user->api_token != $api_token){
+                return response()->json([
+                    'status_code' => 401,
+                    'response' => "Los datos suministrados están corruptos."
+                ]);
+            }
 
             $pedidos = Pedido::select('id','nombre','genero','fecha_lanzamiento', 'descripcion','plataforma','editor','desarrollador','created_at')->where('users_id',$id)->get();
 
@@ -217,6 +227,15 @@ class ApiController extends Controller
             }
 
             $id = $request->users_id;
+            //compruebo que el user indicado sea el dueño del api_token.
+            $api_token = str_replace("Bearer ","",$request->header('Authorization'));
+            $user = User::findOrFail($id);
+            if($user->api_token != $api_token){
+                return response()->json([
+                    'status_code' => 401,
+                    'response' => "Los datos suministrados están corruptos."
+                ]);
+            }
 
             $pedido = new Pedido;
 
@@ -271,6 +290,17 @@ class ApiController extends Controller
                         'status_code' => 500,
                         'message' => (array_key_exists("users_id",$errors)) ? $errors["users_id"][0] : $errors["pedido_id"][0]
                     ], \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            }
+
+            $id = $request->users_id;
+            //compruebo que el user indicado sea el dueño del api_token.
+            $api_token = str_replace("Bearer ","",$request->header('Authorization'));
+            $user = User::findOrFail($id);
+            if($user->api_token != $api_token){
+                return response()->json([
+                    'status_code' => 401,
+                    'response' => "Los datos suministrados están corruptos."
+                ]);
             }
 
             $pedido_id = $request->pedido_id;
@@ -332,6 +362,17 @@ class ApiController extends Controller
                         'status_code' => 500,
                         'message' => ($errors) ? $errors : "Ocurrió un error inesperado"
                     ], \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            }
+
+            $id = $request->users_id;
+            //compruebo que el user indicado sea el dueño del api_token.
+            $api_token = str_replace("Bearer ","",$request->header('Authorization'));
+            $user = User::findOrFail($id);
+            if($user->api_token != $api_token){
+                return response()->json([
+                    'status_code' => 401,
+                    'response' => "Los datos suministrados están corruptos."
+                ]);
             }
 
             $pedido_id = $request->pedido_id;

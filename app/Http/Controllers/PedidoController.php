@@ -10,6 +10,9 @@ use App\Desarrollador;
 use App\Juego;
 use App\Pedido;
 
+/**
+ * Controlador de operaciones sobre pedidos del lado de Administración.
+ */
 class PedidoController extends Controller
 {
     /**
