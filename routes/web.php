@@ -81,3 +81,14 @@ foreach (\Route::getRoutes()->getIterator() as $route){
 }
     dd($routes);
 });
+
+
+//proyecto 3
+Route::get('/dashboard/pedidos/all', 'PedidoController@index')->middleware('is_admin')->name('dashboard.pedido.all');
+Route::get('/dashboard/pedidos/allAjax', 'PedidoController@ajaxPedidos')->middleware('is_admin')->name('dashboard.pedido.all.ajax');
+Route::delete('/dashboard/pedidos/delete/{id}', 'PedidoController@destroy')->middleware('is_admin')->name('dashboard.pedido.delete');
+Route::get('/dashboard/pedidos/tomar/{id}', 'PedidoController@tomarPedido')->middleware('is_admin')->name('dashboard.pedido.tomar');
+Route::post('/dashboard/pedidos/tomar/create', 'PedidoController@newGameCreate')->middleware('is_admin')->name('dashboard.pedido.tomar.create');
+Route::get('/dashboard/pedidos/getAjax/{id}', 'PedidoController@ajaxPedido')->middleware('auth')->middleware('is_admin')->name('dashboard.pedido.ajax');
+
+

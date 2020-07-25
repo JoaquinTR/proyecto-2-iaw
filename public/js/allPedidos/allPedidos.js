@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     //indico como construir la tabla en base a los juegos recibidos
-    $('#dt-juego').DataTable({
+    $('#dt-pedido').DataTable({
         paging: true,
         autoWidth: false,
         processing: true,
@@ -20,7 +20,7 @@ $(document).ready(function() {
         initComplete: function(settings, json) {
             $('.stretched-link').on('click',function(event){
                 let celda = event.currentTarget.parentElement.parentElement; //celda de la datatable
-                let contenido = $('#dt-juego').dataTable().api().cell(celda).data();    //datos de la celda
+                let contenido = $('#dt-pedido').dataTable().api().cell(celda).data();    //datos de la celda
                 if(contenido.includes("[")){
                     contenido = contenido.replace(/(\[|\]|\")/g,''); //elimino los corchetes
                     temp = contenido.split(",");
@@ -36,6 +36,14 @@ $(document).ready(function() {
         columns: [
         {
             data: 'id',
+            class: 'text-center',
+            name: 'id',
+            render: function ( data, type, row ) {
+                return  data;
+            }
+        },
+        {
+            data: 'users_id',
             class: 'text-center',
             name: 'id',
             render: function ( data, type, row ) {
@@ -114,17 +122,6 @@ $(document).ready(function() {
                                 ${dataF}
                             </a>
                         </div>`;
-            }
-        },
-        {
-            data: 'puntaje',
-            class: 'text-center',
-            render: function ( data, type, row ) {
-                let puntaje = row.puntaje;
-                if((puntaje != 0) && (row.cant_calificaciones >0)){
-                    puntaje = puntaje / row.cant_calificaciones;
-                }
-                return  puntaje.toFixed(2);
             }
         },
         {

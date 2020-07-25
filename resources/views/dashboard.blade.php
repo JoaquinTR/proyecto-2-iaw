@@ -94,6 +94,14 @@
                             </a>
                         </div>
 
+                        <hr/>
+
+                        <div class="my-2">
+                            <a class="btn btn-primary  btn-block" href="{{ route('dashboard.pedido.all') }}">
+                                Pedidos
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>

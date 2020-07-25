@@ -28,21 +28,42 @@ class AuthController extends Controller
     public function login(Request $request){
         try {
 
-            $request->validate([
-                'email' => 'email|required',
-                'password' => 'required'
+            $validator = $this->getValidationFactory()
+            ->make(
+                $request->all(),
+                [
+                    'email' => 'bail|email|required',
+                    'password' => 'bail|required'
+                ], [
+                    'email.email' => 'El email suministrado no respeta la forma de un email.',
+                    'email.required' => 'Se necesita un email.',
+                    'password.required' => 'Es necesaria la contraseña para autenticarse.'
+                ]
+            );
+
+            if ($validator->fails()) {
+                $errors = (new \Illuminate\Validation\ValidationException($validator))->errors();
+                throw new \Illuminate\Http\Exceptions\HttpResponseException(response()->json(
+                    [
+                        'status_code' => 500,
+                        'message' => (array_key_exists("email",$errors)) ? $errors["email"][0] : $errors["password"][0]
+                    ], \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            }
+            /* $request->validate([
+                'email' => 'bail|email|required',
+                'password' => 'bail|required'
             ],[
                 'email.email' => 'El email suministrado no respeta la forma de un email.',
                 'email.required' => 'Se necesita un email.',
                 'password.required' => 'Es necesaria la contraseña para autenticarse.'
-            ]);
+            ]); */
 
             $credentials = request(['email', 'password']);
 
             if (!Auth::attempt($credentials)) {
                 return response()->json([
                     'status_code' => 500,
-                    'message' => 'No autorizado'
+                    'message' => 'No se encontro un usuario con el email suministrado, o la contraseña es incorrecta.'
                 ]);
             }
 

@@ -29,4 +29,8 @@ Route::middleware('auth:api')->get('/plataformas/all', 'ApiController@allPlatafo
 Route::middleware('auth:api')->get('/editores/all', 'ApiController@allEditores');
 Route::middleware('auth:api')->get('/desarrolladores/all', 'ApiController@allDesarrolladores');
 
+Route::middleware('auth:api')->post('/pedidos', 'ApiController@misPedidos');
+Route::middleware('auth:api')->post('/pedido/create', 'ApiController@createPedido');
+Route::middleware('auth:api')->delete('/pedido/delete', 'ApiController@deletePedido');
+Route::middleware('auth:api')->put('/pedido/update', 'ApiController@updatePedido');
 //Consultas filtradas (próximamente).

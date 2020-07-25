@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PlataformaSeeder::class,
             EditorSeeder::class,
             DesarrolladorSeeder::class,
-            ImageSeeder::class
+            ImageSeeder::class,
+            PedidoSeeder::class
         ]);
     }
 }
