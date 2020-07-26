@@ -1,0 +1,100 @@
+.fondo{
+    height: 400px !important;
+    opacity: 0.95 !important;
+    background-position: 50% 50% !important;
+}
+.fondo img{
+    max-height: 250px;
+    max-width: 250px;
+    border: 2px solid black;
+}
+.text-shadow{
+    text-shadow: 2px 2px black;
+}
+.navigator{
+    position: relative;
+    background: transparent;
+    bottom: 30px;
+}
+/* .nav-tabs li{
+    border-top: 1px gray !important;
+} */
+.border-2 {
+    border-top-width:2px !important;
+}
+li.active{
+    border-top-width: 3px !important;
+    border-top-color: red !important;
+}
+li.nav-item a.active{
+    color: red !important;
+}
+.circular{
+    border-radius: 400px;
+    height: 100px;
+    width: 100px;
+}
+.circular-inner{
+    border-radius: 400px;
+    height: 80px;
+    width: 80px;
+}
+.c-1 {
+    background-color: red !important;
+    background-image: linear-gradient(126deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-2 {
+    background-color: red !important;
+    background-image: linear-gradient(162deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-3 {
+    background-color: red !important;
+    background-image: linear-gradient(198deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-4 {
+    background-color: red !important;
+    background-image: linear-gradient(234deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-5 {
+    background-color: rgb(255, 196, 0) !important;
+    background-image:  linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-6 {
+    background-color: rgb(255, 196, 0) !important;
+    background-image: linear-gradient(126deg, transparent 50%, rgb(255, 196, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-7 {
+    background-color: rgb(217, 255, 0) !important;
+    background-image: linear-gradient(162deg, transparent 50%, rgb(217, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-8 {
+    background-color: rgb(179, 255, 0) !important;
+    background-image: linear-gradient(198deg, transparent 50%, rgb(179, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-9 {
+    background-color: rgb(102, 255, 0) !important;
+    background-image: linear-gradient(234deg, transparent 50%, rgb(102, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-10 {
+    background-color: rgb(60, 255, 0) !important;
+    background-image: linear-gradient(270deg, transparent 50%, rgb(60, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-11 {
+    background-color: rgb(60, 255, 0) !important;
+    background-image: linear-gradient(240deg, transparent 50%, rgb(60, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+.c-12 {
+    background-color: rgb(60, 255, 0) !important;
+    background-image: linear-gradient(270deg, transparent 50%, rgb(60, 255, 0) 50%), linear-gradient(90deg, white 50%, transparent 50%);
+}

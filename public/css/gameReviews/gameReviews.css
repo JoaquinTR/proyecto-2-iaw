@@ -1,0 +1,13 @@
+.border-r{
+    border-right: 1px solid black !important;
+    border-radius: 0px!important;
+}
+.hover:hover{
+    background-color: purple
+}
+.selectedValue{
+    background-color: purple
+}
+.pagination{
+    justify-content: center;
+}
